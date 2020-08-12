@@ -52,4 +52,18 @@ public interface MemberMapper {
     通过团队ID获得该团队的文档列表
      */
     List<Doc> getDocByTeamID(@Param("teamID") String teamID);
+
+    /*
+    删除团队成员
+    返回结果为删除行数，结果为0时更新失败
+    使用map传参，key分别为userID和teamID
+     */
+    int deleteMember(Map<String, Object> map);
+
+    /*
+    设置管理员
+    返回结果为删除行数，结果为0时更新失败
+    使用map传参，key分别为userID和teamID
+     */
+    int setAdmin(Map<String, Object> map);
 }

@@ -47,4 +47,16 @@
         where teamID = #{teamID};
     </select>
 
+    <delete id="deleteMember" parameterType="Map">
+        delete
+        from Member
+        where userID = #{userID} and teamID = #{teamID}
+    </delete>
+
+    <update id="setAdmin" parameterType="Map">
+        update Member
+        set userIdentity = 1
+        where userID = #{userID} and teamID = #{teamID}
+    </update>
+
 </mapper>
