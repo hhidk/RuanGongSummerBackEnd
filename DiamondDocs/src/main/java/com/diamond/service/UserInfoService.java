@@ -32,6 +32,7 @@ public class UserInfoService {
         user.setEmailAddress(emailAddress);
         user.setUserName(name);
         user.setUserPassword(password);
+        user.setImagePath("https://img-static.mihoyo.com/communityweb/upload/0e16987863d21f5344d4d1d85af4f665.png");
         docUserMapper.addDocUser(user);
         return 0;
     }
