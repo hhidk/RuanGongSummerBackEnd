@@ -13,8 +13,9 @@ public class Doc
     private String teamID;
     private String creatorID;
     private Date createTime;
+    private Date lastEditTime;
     private int editState;
-    private int isOpen;
+    private int docLimit;
     private int isDeleted;
 
 }
