@@ -24,6 +24,7 @@ public class DocService {
         doc.setCreatorID(userID);
         doc.setDocID(DiyUUID.generateDocID());
         doc.setDocTitle("无标题");
+        doc.setDocContent("");
         doc.setDocLimit(0);
         doc.setIsDeleted(0);
         if(!teamID.equals("0"))
