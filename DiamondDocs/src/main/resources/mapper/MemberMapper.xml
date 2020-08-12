@@ -7,8 +7,8 @@
 
     <insert id="addMember" parameterType="Member">
         insert
-        into Member(userID, userIdentity, teamID)
-        VALUES (#{userID}, #{userIdentity}, #{teamID});
+        into Member(userID, userIdentity, teamID, lastVisitTime)
+        VALUES (#{userID}, #{userIdentity}, #{teamID}, GETDATE());
     </insert>
 
     <select id="getCollaboratorNum" parameterType="String" resultType="int">

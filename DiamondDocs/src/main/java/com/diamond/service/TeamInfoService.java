@@ -22,10 +22,12 @@ public class TeamInfoService {
     public int addTeam(String userID, String TeamName)
     {
         Team team = new Team();
+        String teamID = DiyUUID.generateTeamID();
         team.setCreatorID(userID);
         team.setTeamName(TeamName);
-        team.setTeamID(DiyUUID.generateTeamID());
+        team.setTeamID(teamID);
         teamMapper.createTeam(team);
+        memberMapper.addMember(new Member(userID,2,teamID));
         return 0;
     }
 
