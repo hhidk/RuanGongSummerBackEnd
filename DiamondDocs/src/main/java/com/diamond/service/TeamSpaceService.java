@@ -37,6 +37,6 @@ public class TeamSpaceService {
     }
 
     public int getUserIdentity(int userID, int teamID) throws Exception {
-        return 0;
+        return memberMapper.getDocUserIdentity(userID, teamID);
     }
 }

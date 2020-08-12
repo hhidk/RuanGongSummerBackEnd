@@ -23,6 +23,12 @@
         where userID = #{userID}
     </update>
 
+    <select id="getDocUserIdentity" parameterType="String">
+        select userIdentity
+        from Member
+        where userID = #{userID} and teamID = #{teamID}
+    </select>
+
     <select id="getTeamByUserID" parameterType="String" resultType="Team">
         select *
         from Team
@@ -55,7 +61,7 @@
 
     <update id="setAdmin" parameterType="Map">
         update Member
-        set userIdentity = 1
+        set userIdentity = #{userIdentity}
         where userID = #{userID} and teamID = #{teamID}
     </update>
 

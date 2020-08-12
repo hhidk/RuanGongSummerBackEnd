@@ -33,6 +33,11 @@ public interface MemberMapper {
     int updateDocUserIdentity(Map<String, Object> map);
 
     /*
+    查询用户身份
+     */
+    int getDocUserIdentity(int userID, int teamID);
+
+    /*
     通过用户ID获得一个该用户参加的团队列表
      */
     List<Team> getTeamByUserID(@Param("userID") String userID);

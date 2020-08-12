@@ -51,10 +51,10 @@ public class TeamInfoController {
     }
 
     @RequestMapping("/setAdmin")
-    public int setAdmin(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID)
+    public int setAdmin(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID, @RequestParam("userIdentity") int userIdentity)
     {
         try {
-            return teamInfoService.setAdmin(userID, teamID);
+            return teamInfoService.setAdmin(userID, teamID, userIdentity);
         }
         catch (Exception e){
             e.printStackTrace();

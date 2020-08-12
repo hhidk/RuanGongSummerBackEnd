@@ -44,11 +44,12 @@ public class TeamInfoService {
         return 0;
     }
 
-    public int setAdmin(String userID,String teamID)
+    public int setAdmin(String userID, String teamID, int userIdentity)
     {
         Map<String, Object> map = new HashMap<>();
         map.put("userID", userID);
         map.put("teamID", teamID);
+        map.put("userIdentity", userIdentity);
         memberMapper.setAdmin(map);
         return 0;
     }
