@@ -45,12 +45,12 @@ public class DocController {
         }
     }
 
-    @RequestMapping("/updateDoc")
-    public int updateDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID,
+    @RequestMapping("/editDoc")
+    public int editDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID,
                           @RequestParam("docTitle") String docTitle, @RequestParam("docContent") String docContent,
                           @RequestParam("docLimit") int docLimit){
         try {
-            docService.editDoc(docID,userID,docTitle,docContent,docLimit);
+            docService.editDoc(docID,docTitle,docContent,docLimit);
             historyService.editDoc(userID,docID);
 
             return 0;
@@ -64,7 +64,7 @@ public class DocController {
     @RequestMapping("/deleteDoc")
     public int deleteDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
         try {
-            docService.deleteDoc(userID,docID);
+            docService.deleteDoc(docID);
             historyService.deleteDoc(userID,docID);
             return 0;
         }
@@ -77,7 +77,7 @@ public class DocController {
     @RequestMapping("/recoverDoc")
     public int recoverDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
         try {
-            docService.recoverDoc(userID,docID);
+            docService.recoverDoc(docID);
             historyService.recoverDoc(userID,docID);
             return 0;
         }
@@ -90,7 +90,7 @@ public class DocController {
     @RequestMapping("/collectDoc")
     public int collectDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
         try {
-            docService.collectDoc(userID,docID);
+            docService.collectDoc(userID, docID);
             return 0;
         }
         catch (Exception e){

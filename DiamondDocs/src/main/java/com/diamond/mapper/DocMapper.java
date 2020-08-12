@@ -21,7 +21,7 @@ public interface DocMapper
     int getDocDeleteState(String docID);
 
     /*
-    key:docID, docTitle, docContent
+    key:docID, docTitle, docContent, docLimit
      */
     int updateDoc(Map<String, Object> map);
 

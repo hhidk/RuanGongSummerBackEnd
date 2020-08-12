@@ -10,7 +10,8 @@ import java.util.Map;
 @Repository
 public interface FavoriteMapper
 {
-    int addFavorite(Favorite favorite);
+    //key:docID, userID
+    int addFavorite(Map<String, Object> map);
 
     //应该还需要一个查找的，现在不知道需要返回docID还是Favorite对象，所以没写
 

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.diamond.mapper.FavoriteMapper">
 
-    <insert id="addFavorite" parameterType="Favorite">
+    <insert id="addFavorite" parameterType="Map">
         insert
         into Favorite (docID, userID, createTime)
         values (#{docID}, #{userID}, GETDATE());
