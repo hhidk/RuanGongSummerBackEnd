@@ -12,4 +12,6 @@ import java.util.List;
 public interface HistoryMapper
 {
     int addHistory(History history);
+
+
 }

@@ -36,7 +36,7 @@ public class DocController {
     public DocPreview addDoc(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID){
         try {
             DocPreview docPreview = docService.addDoc(userID,teamID);
-            historyService.addDoc(userID,teamID);
+            historyService.addDoc(userID,docPreview.getDocID());
             return docPreview;
         }
         catch (Exception e){
