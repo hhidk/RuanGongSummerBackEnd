@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.diamond.mapper.DocMapper">
+
+    <insert id="addDoc" parameterType="Doc">
+        insert
+        into Doc(docID, docContent, docTitle, teamID, creatorID, createTime, lastEditTime, editState, docLimit, isDeleted)
+        values (#{docID}, #{docContent}, #{docTitle}, #{teamID}, #{creatorID}, GETDATE(), GETDATE(), #{editState}, #{docLimit}, #{isDeleted});
+    </insert>
+
+    <select id="getDocByDocID" parameterType="String" resultType="Doc">
+        select *
+        from Doc
+        where docID = #{docID};
+    </select>
+
+    <select id="getDocByTeamID" parameterType="String" resultType="Doc">
+        select *
+        from Doc
+        where teamID = #{teamID};
+    </select>
+
+    <select id="getDocDeleteState" parameterType="String" resultType="int">
+        select isDeleted
+        from Doc
+        where docID = #{docID};
+    </select>
+
+    <update id="updateDoc" parameterType="Map">
+        update Doc
+        set docTitle = #{docTitle}, docContent = #{docContent}, lastEditTime = GETDATE()
+        where docID = #{docID};
+    </update>
+
+    <update id="movDocToCycleBin" parameterType="String">
+        update Doc
+        set isDeleted = 1
+        where docID = #{docID};
+    </update>
+
+    <update id="recoverDoc" parameterType="String">
+        update Doc
+        set isDeleted = 0
+        where docID = #{docID};
+    </update>
+
+    <delete id="deleteDoc" parameterType="String">
+        delete
+        from Doc
+        where docID = #{docID};
+    </delete>
+
+</mapper>
