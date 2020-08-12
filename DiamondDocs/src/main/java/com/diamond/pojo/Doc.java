@@ -12,8 +12,8 @@ public class Doc
     private String docTitle;
     private String teamID;
     private String creatorID;
-    private Date createTime;
-    private Date lastEditTime;
+    private String createTime;
+    private String lastEditTime;
     private int editState;
     private int docLimit;
     private int isDeleted;
