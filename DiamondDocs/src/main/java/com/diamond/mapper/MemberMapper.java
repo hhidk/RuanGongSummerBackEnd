@@ -35,7 +35,7 @@ public interface MemberMapper {
     /*
     查询用户身份
      */
-    int getDocUserIdentity(int userID, int teamID);
+    int getDocUserIdentity(String userID, String teamID);
 
     /*
     通过用户ID获得一个该用户参加的团队列表

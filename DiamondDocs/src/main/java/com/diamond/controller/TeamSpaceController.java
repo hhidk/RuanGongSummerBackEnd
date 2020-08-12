@@ -53,7 +53,7 @@ public class TeamSpaceController {
     }
 
     @RequestMapping("/getUserIdentity")
-    public int getUserIdentity(@RequestParam("userID") int userID, @RequestParam("teamID") int teamID){
+    public int getUserIdentity(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID){
         try {
             return teamSpaceService.getUserIdentity(userID,teamID);
         }
