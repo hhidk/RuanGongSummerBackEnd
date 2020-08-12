@@ -1,6 +1,7 @@
 package com.diamond.controller;
 
 import com.diamond.dto.DocPlus;
+import com.diamond.dto.DocPreview;
 import com.diamond.service.DocService;
 import com.diamond.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,19 +32,27 @@ public class DocController {
         }
     }
 
-    @RequestMapping("/updateDoc")
-    public int updateDoc(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID,
-                          @RequestParam("docTitle") String docTitle, @RequestParam("docContent") String docContent,
-                          @RequestParam("docLimit") int docLimit, @RequestParam("docID") String docID){
+    @RequestMapping("/addDoc")
+    public DocPreview addDoc(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID){
         try {
-            if(docID.equals("0")) {
-                docService.addDoc(userID, teamID, docTitle, docContent, docLimit);
-                historyService.addDoc(userID, docID);
-            }
-            else{
-                docService.editDoc(docID,userID,teamID,docTitle,docContent,docLimit);
-                historyService.editDoc(userID,docID);
-            }
+            DocPreview docPreview = docService.addDoc(userID,teamID);
+            historyService.addDoc(userID,teamID);
+            return docPreview;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/updateDoc")
+    public int updateDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID,
+                          @RequestParam("docTitle") String docTitle, @RequestParam("docContent") String docContent,
+                          @RequestParam("docLimit") int docLimit){
+        try {
+            docService.editDoc(docID,userID,docTitle,docContent,docLimit);
+            historyService.editDoc(userID,docID);
+
             return 0;
         }
         catch (Exception e){

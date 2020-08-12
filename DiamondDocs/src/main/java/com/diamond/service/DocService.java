@@ -1,6 +1,7 @@
 package com.diamond.service;
 
 import com.diamond.dto.DocPlus;
+import com.diamond.dto.DocPreview;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,12 +11,11 @@ public class DocService {
         return null;
     }
 
-    public void addDoc(String userID, String teamID, String docTitle,
-                       String docContent, int docLimit) throws Exception{
-
+    public DocPreview addDoc(String userID, String teamID) throws Exception{
+        return null;
     }
 
-    public void editDoc(String docID, String userID, String teamID,
+    public void editDoc(String docID, String userID,
                         String docTitle, String docContent, int docLimit) throws Exception{
 
     }
