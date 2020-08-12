@@ -23,7 +23,7 @@
         where userID = #{userID}
     </update>
 
-    <select id="getDocUserIdentity" parameterType="String">
+    <select id="getDocUserIdentity" parameterType="String" resultType="int">
         select userIdentity
         from Member
         where userID = #{userID} and teamID = #{teamID}
