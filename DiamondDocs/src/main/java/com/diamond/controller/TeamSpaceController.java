@@ -51,4 +51,15 @@ public class TeamSpaceController {
             return null;
         }
     }
+
+    @RequestMapping("/getUserIdentity")
+    public int getUserIdentity(@RequestParam("userID") int userID, @RequestParam("teamID") int teamID){
+        try {
+            return teamSpaceService.getUserIdentity(userID,teamID);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return 3;
+        }
+    }
 }

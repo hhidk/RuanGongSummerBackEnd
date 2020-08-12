@@ -35,4 +35,8 @@ public class TeamSpaceService {
         List<Doc> docList = memberMapper.getDocByTeamID(teamID);
         return DocPreview.getPreviewList(docList);
     }
+
+    public int getUserIdentity(int userID, int teamID) throws Exception {
+        return 0;
+    }
 }
