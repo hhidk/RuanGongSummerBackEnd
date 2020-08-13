@@ -11,6 +11,12 @@
         values (#{docID}, #{userID}, GETDATE());
     </insert>
 
+    <select id="getFavoriteDocByUserID" parameterType="String" resultType="Doc">
+        select *
+        from Doc
+        where docID in (select docID from Favorite where userID = #{userID})
+    </select>
+
     <delete id="deleteFavorite" parameterType="Map">
         delete
         from Favorite

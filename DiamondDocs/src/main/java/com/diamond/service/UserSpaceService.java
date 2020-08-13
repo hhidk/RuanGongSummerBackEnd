@@ -2,6 +2,7 @@ package com.diamond.service;
 
 import com.diamond.dto.DocPreview;
 import com.diamond.mapper.DocMapper;
+import com.diamond.mapper.FavoriteMapper;
 import com.diamond.pojo.Doc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ public class UserSpaceService {
 
     @Autowired
     private DocMapper docMapper;
+    @Autowired
+    private FavoriteMapper favoriteMapper;
 
     public List<DocPreview> getMyDocs(String userID) throws Exception{
         List<Doc> list = docMapper.getDocByUserID(userID);
@@ -24,7 +27,8 @@ public class UserSpaceService {
     }
 
     public List<DocPreview> getFavoriteDocs(String userID) throws Exception{
-        return null;
+        List<Doc> list = favoriteMapper.getFavoriteDocByUserID(userID);
+        return DocPreview.getPreviewList(list);
     }
 
     public List<DocPreview> getDeletedDocs(String userID) throws Exception{
