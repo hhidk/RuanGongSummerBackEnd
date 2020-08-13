@@ -29,6 +29,12 @@
         where userID = #{userID} and teamID = #{teamID}
     </select>
 
+    <select id="checkIsInGroup" parameterType="String" resultType="Member">
+        select *
+        from Member
+        where userID = #{userID} and teamID = #{teamID}
+    </select>
+
     <select id="getTeamByUserID" parameterType="String" resultType="Team">
         select *
         from Team
@@ -45,6 +51,12 @@
         select DocUser.userID, userName, userIdentity, emailAddress, imagePath
         from Member,DocUser
         where Member.teamID = #{teamID} and Member.userID = DocUser.userID;
+    </select>
+
+    <select id="getTeamMemberPreviewByTeamIDWithSearch" parameterType="String" resultType="MemberPreview">
+        select DocUser.userID, userName, userIdentity, emailAddress, imagePath
+        from Member,DocUser
+        where Member.teamID = #{teamID} and Member.userID = DocUser.userID and userName like #{searchText}
     </select>
 
     <select id="getDocByTeamID" parameterType="String" resultType="Doc">

@@ -37,6 +37,8 @@ public interface MemberMapper {
      */
     int getDocUserIdentity(String userID, String teamID);
 
+    Member checkIsInGroup(String userID, String teamID);
+
     /*
     通过用户ID获得一个该用户参加的团队列表
      */
@@ -52,6 +54,13 @@ public interface MemberMapper {
     多表联合查询
      */
     List<MemberPreview> getTeamMemberPreviewByTeamID(@Param("teamID") String teamID);
+
+    /*
+    通过团队ID获得一个该团队内的团队成员列表
+    多表联合查询
+    搜索关键词
+     */
+    List<MemberPreview> getTeamMemberPreviewByTeamIDWithSearch(@Param("teamID") String teamID, @Param("searchText") String searchText);
 
     /*
     通过团队ID获得该团队的文档列表

@@ -18,10 +18,14 @@ import java.util.List;
 public class DocUserPreview {
     String userID;
     String userName;
+    String imagePath;
+    String emailAddress;
 
     public DocUserPreview(DocUser docUser){
         this.userID = docUser.getUserID();
         this.userName = docUser.getUserName();
+        this.imagePath = docUser.getImagePath();
+        this.emailAddress = docUser.getEmailAddress();
     }
 
     public static List<DocUserPreview> getPreviewList(List<DocUser> userList){
