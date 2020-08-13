@@ -26,7 +26,7 @@
     <select id="getNotRelatedTeamByUserID" parameterType="Map" resultType="Team">
         select *
         from Team
-        where Team.teamID not in (select Member.teamID from Member where Member.userID = #{userID}) and
+        where not exists (select * from Member where Member.userID = #{userID} and Member.teamID = Team.teamID) and
               Team.teamName like #{keyword}
     </select>
 
