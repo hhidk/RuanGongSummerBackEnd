@@ -17,6 +17,12 @@
         where userName = #{userName};
     </select>
 
+    <select id="getDocUserByFuzzyQuery" parameterType="String" resultType="DocUser">
+        select *
+        from DocUser
+        where userName like #{userName};
+    </select>
+
     <select id="getDocUserByEmailAddress" parameterType="String" resultType="DocUser">
         select *
         from DocUser

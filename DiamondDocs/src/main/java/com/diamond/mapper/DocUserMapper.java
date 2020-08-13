@@ -20,9 +20,15 @@ public interface DocUserMapper {
 
     /*
     根据UserName获取用户所有信息*
-    返回一个DocUser
+    返回所有同名DocUser
      */
     List<DocUser> getDocUserByUserName(@Param("userName") String userName);
+
+    /*
+    模糊查询username
+    返回DocUser列表
+     */
+    List<DocUser> getDocUserByFuzzyQuery(@Param("userName") String userName);
 
     /*
     根据邮箱地址获取用户所有信息*

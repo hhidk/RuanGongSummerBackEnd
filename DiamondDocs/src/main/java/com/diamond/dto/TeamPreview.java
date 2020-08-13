@@ -9,7 +9,7 @@ import java.util.List;
 
 /*
 * 团队类的简略信息
-* 用于在团队空间中预览团队列表
+* 用于在团队空间/搜索中预览团队列表
 */
 @Data
 @NoArgsConstructor
