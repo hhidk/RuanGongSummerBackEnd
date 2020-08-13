@@ -11,4 +11,10 @@
         VALUES (#{docID}, #{iteration}, #{operation}, #{userID}, GETDATE());
     </insert>
 
+    <select id="getLastHistory" parameterType="String" resultType="int">
+        select max(iteration)
+        from History
+        where docID = #{docID}
+    </select>
+
 </mapper>

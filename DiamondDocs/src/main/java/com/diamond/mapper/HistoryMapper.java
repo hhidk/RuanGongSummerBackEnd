@@ -13,5 +13,5 @@ public interface HistoryMapper
 {
     int addHistory(History history);
 
-
+    int getLastHistory(String DocID);
 }

@@ -12,7 +12,12 @@ public class HistoryService {
     private HistoryMapper historyMapper;
 
     public void editDoc(String userID, String docID) throws Exception{
-
+        History history = new History();
+        history.setDocID(docID);
+        history.setIteration(historyMapper.getLastHistory(docID)+1);
+        history.setUserID(userID);
+        history.setOperation(2);
+        historyMapper.addHistory(history);
     }
 
     public void addDoc(String userID, String docID) throws Exception{
@@ -25,11 +30,21 @@ public class HistoryService {
     }
 
     public void deleteDoc(String userID, String docID) throws Exception{
-
+        History history = new History();
+        history.setDocID(docID);
+        history.setIteration(historyMapper.getLastHistory(docID)+1);
+        history.setUserID(userID);
+        history.setOperation(3);
+        historyMapper.addHistory(history);
     }
 
     public void recoverDoc(String userID, String docID) throws Exception{
-
+        History history = new History();
+        history.setDocID(docID);
+        history.setIteration(historyMapper.getLastHistory(docID)+1);
+        history.setUserID(userID);
+        history.setOperation(4);
+        historyMapper.addHistory(history);
     }
 
 }
