@@ -17,6 +17,12 @@
         where docID = #{docID};
     </select>
 
+    <select id="getDocByDocTitle" parameterType="String" resultType="Doc">
+        select *
+        from Doc
+        where docTitle like #{docTitle};
+    </select>
+
     <select id="getDocByTeamID" parameterType="String" resultType="Doc">
         select *
         from Doc

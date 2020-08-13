@@ -7,6 +7,7 @@ import com.diamond.dto.TeamPreview;
 import com.diamond.mapper.DocMapper;
 import com.diamond.mapper.DocUserMapper;
 import com.diamond.mapper.TeamMapper;
+import com.diamond.pojo.Doc;
 import com.diamond.pojo.DocUser;
 import com.diamond.pojo.Team;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,10 @@ public class SearchService {
     }
 
     public List<SearchPreview> searchDoc(String keyword) {
-        List<Team> list = new ArrayList<>();
-        return null;
+        List<Doc> list = new ArrayList<>();
+        list.add(docMapper.getDocByDocID(keyword));
+        list.addAll(docMapper.getDocByDocTitle("%"+keyword+"%"));
+        return SearchPreview.getDocList(list);
     }
 
     public List<SearchPreview> searchTeam(String keyword) {

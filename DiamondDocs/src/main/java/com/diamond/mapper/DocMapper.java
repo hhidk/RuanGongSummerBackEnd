@@ -16,6 +16,8 @@ public interface DocMapper
 
     Doc getDocByDocID(String docID);
 
+    List<Doc> getDocByDocTitle(String docTitle);
+
     List<Doc> getDocByTeamID(String teamID);
 
     int getDocDeleteState(String docID);
