@@ -98,6 +98,32 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
+    public void quitTeam(String userID, String teamID)
+    {
+        Message message = new Message();
+        message.setMsgID(DiyUUID.generateMsgID());
+        message.setMsgContent("");
+        message.setMsgType(7);
+        message.setTeamID(teamID);
+        message.setUserID(userID);
+        message.setTargetUserID(teamMapper.getCreatorIDByTeamID(teamID));
+
+        messageMapper.addMessage(message);
+    }
+
+    public void dismissMember(String userID, String targetUserID, String teamID)
+    {
+        Message message = new Message();
+        message.setMsgID(DiyUUID.generateMsgID());
+        message.setMsgContent("");
+        message.setMsgType(8);
+        message.setTeamID(teamID);
+        message.setUserID(userID);
+        message.setTargetUserID(targetUserID);
+
+        messageMapper.addMessage(message);
+    }
+
     public List<TeamMessage> getCommonMsg(int type, String userID) throws Exception
     {
         List<TeamMessage> list = new ArrayList<>();

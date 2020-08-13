@@ -127,7 +127,21 @@ public class TeamInfoController {
     public int quitTeam(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID)
     {
         try {
+            messageService.quitTeam(userID, teamID);
             return teamInfoService.quitTeam(userID, teamID);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/dismissMember")
+    public int dismissMember(@RequestParam("userID") String userID, @RequestParam("targetUserID") String targetUserID, @RequestParam("teamID") String teamID)
+    {
+        try {
+            messageService.dismissMember(userID, targetUserID, teamID);
+            return teamInfoService.quitTeam(targetUserID, teamID);
         }
         catch (Exception e){
             e.printStackTrace();
