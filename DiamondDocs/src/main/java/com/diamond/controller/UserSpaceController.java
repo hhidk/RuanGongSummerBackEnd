@@ -18,7 +18,7 @@ public class UserSpaceController {
     private UserSpaceService userSpaceService;
 
     @RequestMapping("/getMyDocs")
-    public List<DocPreview> getMyDocs(int userID){
+    public List<DocPreview> getMyDocs(String userID){
         try {
             return userSpaceService.getMyDocs(userID);
         }
@@ -29,7 +29,7 @@ public class UserSpaceController {
     }
 
     @RequestMapping("/getRecentDocs")
-    public List<DocPreview> getRecentDocs(int userID){
+    public List<DocPreview> getRecentDocs(String userID){
         try {
             return userSpaceService.getRecentDocs(userID);
         }
@@ -40,11 +40,22 @@ public class UserSpaceController {
     }
 
     @RequestMapping("/getFavoriteDocs")
-    public List<DocPreview> getFavoriteDocs(int userID){
+    public List<DocPreview> getFavoriteDocs(String userID){
         try {
             return userSpaceService.getFavoriteDocs(userID);
         }
         catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/getDeletedDocs")
+    public List<DocPreview> getDeletedDocs(String userID){
+        try{
+            return userSpaceService.getDeletedDocs(userID);
+        }
+        catch (Exception e){
             e.printStackTrace();
             return null;
         }
