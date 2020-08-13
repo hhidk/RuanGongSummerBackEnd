@@ -53,6 +53,12 @@
         where docID = #{docID};
     </update>
 
+    <update id="updateDocTitle" parameterType="String">
+        update Doc
+        set docTitle = #{docTitle}
+        where docID = #{docID}
+    </update>
+
     <update id="movDocToCycleBin" parameterType="String">
         update Doc
         set isDeleted = 1

@@ -5,6 +5,7 @@ import com.diamond.dto.DocPreview;
 import com.diamond.service.DocService;
 import com.diamond.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.UsesSunHttpServer;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,15 +34,29 @@ public class DocController {
     }
 
     @RequestMapping("/addDoc")
-    public DocPreview addDoc(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID){
+    public String addDoc(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID){
         try {
-            DocPreview docPreview = docService.addDoc(userID,teamID);
-            historyService.addDoc(userID,docPreview.getDocID());
-            return docPreview;
+            String docID = docService.addDoc(userID,teamID);
+            historyService.addDoc(userID,docID);
+            return docID;
         }
         catch (Exception e){
             e.printStackTrace();
-            return null;
+            return "1";
+        }
+    }
+
+    @RequestMapping("/editDocTitle")
+    public int editDocTitle(@RequestParam("docID") String docID, @RequestParam("docTitle") String docTitle,
+                            @RequestParam("userID") String userID){
+        try {
+            docService.editDocTitle(docID,docTitle);
+            historyService.editDocTitle(userID,docID);
+            return 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
         }
     }
 

@@ -20,6 +20,15 @@ public class HistoryService {
         historyMapper.addHistory(history);
     }
 
+    public void editDocTitle(String userID, String docID) throws Exception{
+        History history = new History();
+        history.setDocID(docID);
+        history.setIteration(historyMapper.getLastHistory(docID)+1);
+        history.setUserID(userID);
+        history.setOperation(5);
+        historyMapper.addHistory(history);
+    }
+
     public void addDoc(String userID, String docID) throws Exception{
         History history = new History();
         history.setDocID(docID);

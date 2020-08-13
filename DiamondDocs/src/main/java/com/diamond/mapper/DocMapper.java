@@ -4,6 +4,7 @@ import com.diamond.pojo.Doc;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,8 @@ public interface DocMapper
     key:docID, docTitle, docContent, docLimit
      */
     int updateDoc(Map<String, Object> map);
+
+    int updateDocTitle(@Param("docID") String docID, @Param("docTitle") String docTitle);
 
     int movDocToCycleBin(@Param("docID") String docID);
 

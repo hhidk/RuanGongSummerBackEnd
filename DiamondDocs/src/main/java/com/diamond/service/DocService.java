@@ -25,11 +25,12 @@ public class DocService {
         return null;
     }
 
-    public DocPreview addDoc(String userID, String teamID) throws Exception{
+    public String addDoc(String userID, String teamID) throws Exception{
         Doc doc = new Doc();
+        String docID = DiyUUID.generateDocID();
 
         doc.setCreatorID(userID);
-        doc.setDocID(DiyUUID.generateDocID());
+        doc.setDocID(docID);
         doc.setDocTitle("无标题");
         doc.setDocContent("");
         doc.setDocLimit(0);
@@ -38,7 +39,11 @@ public class DocService {
             doc.setTeamID(teamID);
 
         docMapper.addDoc(doc);
-        return new DocPreview(doc);
+        return docID;
+    }
+
+    public void editDocTitle(String docID, String docTitle) throws Exception{
+        docMapper.updateDocTitle(docID,docTitle);
     }
 
     public void editDoc(String docID, String docTitle,
