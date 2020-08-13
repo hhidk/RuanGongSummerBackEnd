@@ -2,6 +2,7 @@ package com.diamond.service;
 
 import com.diamond.dto.TeamMessage;
 import com.diamond.mapper.MessageMapper;
+import com.diamond.utils.FormatHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +19,21 @@ public class MessageService {
     {
         List<TeamMessage> list = new ArrayList<>();
         if(type == 0)
-            list =  messageMapper.getInvitationMsg(userID);
+        {
+            list = messageMapper.getInvitationMsg(userID);
+            for (TeamMessage teamMessage : list)
+            {
+                teamMessage.setCreateTime(FormatHandler.AlterTimeFormat(teamMessage.getCreateTime()));
+            }
+        }
         else if(type == 1)
-            list =  messageMapper.getApplicationMsg(userID);
+        {
+            list = messageMapper.getApplicationMsg(userID);
+            for (TeamMessage teamMessage : list)
+            {
+                teamMessage.setCreateTime(FormatHandler.AlterTimeFormat(teamMessage.getCreateTime()));
+            }
+        }
         return list;
     }
 
