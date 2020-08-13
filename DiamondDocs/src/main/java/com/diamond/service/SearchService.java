@@ -1,8 +1,12 @@
 package com.diamond.service;
 
+import com.diamond.dto.DocPreview;
+import com.diamond.dto.DocUserPreview;
+import com.diamond.dto.MemberPreview;
 import com.diamond.dto.SearchPreview;
 import com.diamond.mapper.DocMapper;
 import com.diamond.mapper.DocUserMapper;
+import com.diamond.mapper.MemberMapper;
 import com.diamond.mapper.TeamMapper;
 import com.diamond.pojo.Doc;
 import com.diamond.pojo.DocUser;
@@ -24,6 +28,8 @@ public class SearchService {
     private TeamMapper teamMapper;
     @Autowired
     private DocMapper docMapper;
+    @Autowired
+    private MemberMapper memberMapper;
 
     public List<SearchPreview> searchUser(String keyword) {
         List<DocUser> list = new ArrayList<>();
@@ -38,13 +44,35 @@ public class SearchService {
         return SearchPreview.getUserList(list);
     }
 
+    public List<MemberPreview> searchTeamMember(String teamID, String searchText) {
+        return memberMapper.getTeamMemberPreviewByTeamIDWithSearch(teamID, "%"+searchText+"%");
+    }
+
+    public List<DocUserPreview> searchOutsideUser(String teamID, String keyword) {
+        List<DocUser> list = new ArrayList<>();
+        list.addAll(docUserMapper.getDocUserByUserName(keyword));
+        list.add(docUserMapper.getDocUserByEmailAddress(keyword));
+        list.add(docUserMapper.getUserByID(keyword));
+        list.add(docUserMapper.getUserByGithubID(keyword));
+        list.addAll(docUserMapper.getDocUserByFuzzyQuery("%"+keyword+"%"));
+        if(list.isEmpty())
+            return null;
+        list = removeDuplicated(list);
+        List<DocUserPreview> newList = new ArrayList<>();
+        for(DocUser user : list){
+            if(memberMapper.checkIsInGroup(user.getUserID(), teamID) == null)
+                newList.add(new DocUserPreview(user));
+        }
+        return newList;
+    }
+
     public List<SearchPreview> searchDoc(String userID, String keyword) {
         List<Doc> list = new ArrayList<>();
         list.add(docMapper.getDocByDocID(keyword));
 
         Map<String, Object> map = new HashMap<>();
         map.put("userID", userID);
-        map.put("keyword", keyword);
+        map.put("keyword", "%"+keyword+"%");
         list.addAll(docMapper.getRelatedDocByUserID(map));
         if(list.isEmpty())
             return null;
@@ -58,7 +86,7 @@ public class SearchService {
 
         Map<String, Object> map = new HashMap<>();
         map.put("userID", userID);
-        map.put("keyword", keyword);
+        map.put("keyword", "%"+keyword+"%");
         list.addAll(teamMapper.getRelatedTeamByUserID(map));
         if(list.isEmpty())
             return null;
