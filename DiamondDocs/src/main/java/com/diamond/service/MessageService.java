@@ -33,7 +33,7 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
-    public void accpetMember(String userID, String targetUserID, String teamID)
+    public void acceptMember(String userID, String targetUserID, String teamID)
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());

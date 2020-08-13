@@ -33,8 +33,8 @@ public class TeamInfoController {
     public int acceptMember(@RequestParam("userID") String userID, @RequestParam("targetUserID") String targetUserID,
                             @RequestParam("teamID") String teamID, @RequestParam("msgID") String msgID){
         try {
-            messageService.accpetMember(userID,targetUserID,teamID);
-            teamInfoService.accpetMember(targetUserID,teamID);
+            messageService.acceptMember(userID,targetUserID,teamID);
+            teamInfoService.acceptMember(targetUserID,teamID);
             messageService.deleteMsg(msgID);
             return 0;
         }

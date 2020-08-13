@@ -64,7 +64,7 @@ public class TeamInfoService {
         return 0;
     }
 
-    public void accpetMember(String userID, String teamID)
+    public void acceptMember(String userID, String teamID)
     {
         Member member = new Member();
         member.setUserID(userID);
