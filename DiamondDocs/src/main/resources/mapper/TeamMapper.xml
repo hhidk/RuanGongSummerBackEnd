@@ -23,7 +23,7 @@
         where teamName like #{searchText};
     </select>
 
-    <select id="getNotRelatedTeamByUserID" parameterType="Map" resultType="Team">
+    <select id="getUnrelatedTeamByUserID" parameterType="Map" resultType="Team">
         select *
         from Team
         where not exists (select * from Member where Member.userID = #{userID} and Member.teamID = Team.teamID) and
