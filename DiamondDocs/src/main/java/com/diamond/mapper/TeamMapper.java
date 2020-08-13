@@ -28,7 +28,7 @@ public interface TeamMapper {
     List<Team> getTeamByNameLike(@Param("searchText") String searchText);
 
     //key:userID, keyword
-    List<Team> getNotRelatedTeamByUserID(Map<String, Object> map);
+    List<Team> getUnrelatedTeamByUserID(Map<String, Object> map);
 
     String getCreatorIDByTeamID(@Param("teamID") String teamID);
 
