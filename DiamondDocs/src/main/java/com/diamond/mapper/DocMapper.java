@@ -20,6 +20,9 @@ public interface DocMapper
 
     List<Doc> getDocByDocTitle(@Param("docTitle") String docTitle);
 
+    //key:userID, keyword
+    List<Doc> getRelatedDocByUserID(Map<String, Object> map);
+
     List<Doc> getDocByTeamID(@Param("teamID") String teamID);
 
     List<Doc> getDocByUserID(@Param("userID") String userID);

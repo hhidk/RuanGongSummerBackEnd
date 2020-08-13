@@ -23,6 +23,15 @@
         where docTitle like #{docTitle} and isDeleted = 0;
     </select>
 
+    <select id="getRelatedDocByUserID" parameterType="Map" resultType="Doc">
+        select *
+        from Doc
+        where (Doc.creatorID = #{userID} or
+              Doc.teamID in (select Member.teamID from Member where Member.userID = #{userID})) and
+              Doc.docTitle like #{keyword} and
+              isDeleted = 0;
+    </select>
+
     <select id="getDocByTeamID" parameterType="String" resultType="Doc">
         select *
         from Doc
