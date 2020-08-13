@@ -22,4 +22,10 @@ public class DiyUUID {
                 .substring(0,10).toUpperCase();
     }
 
+    public static String generateMsgID(){
+        return UUID.randomUUID().toString()
+                .replace("-","")
+                .substring(0,10).toUpperCase();
+    }
+
 }
