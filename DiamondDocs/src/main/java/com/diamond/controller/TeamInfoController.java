@@ -1,5 +1,6 @@
 package com.diamond.controller;
 
+import com.diamond.service.MessageService;
 import com.diamond.service.TeamInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +14,85 @@ public class TeamInfoController {
 
     @Autowired
     private TeamInfoService teamInfoService;
+    @Autowired
+    private MessageService messageService;
+
+    @RequestMapping("/applyTeam")
+    public int applyTeam(@RequestParam("userID") String userID, @RequestParam("targetTeamID") String teamID, @RequestParam("content") String msgContent){
+        try {
+
+            return 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/acceptMember")
+    public int acceptMember(@RequestParam("userID") String userID, @RequestParam("targetUserID") String targetUserID,
+                            @RequestParam("teamID") String teamID, @RequestParam("msgID") String msgID){
+        try {
+
+            return 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/refuseMember")
+    public int refuseMember(@RequestParam("userID") String userID, @RequestParam("targetUserID") String targetUserID,
+                            @RequestParam("teamID") String teamID, @RequestParam("msgID") String msgID){
+        try {
+
+            return 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/inviteMember")
+    public int inviteMember(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID,
+                            @RequestParam("targetUserID") String targetUserID, @RequestParam("content") String msgContent){
+        try {
+
+            return 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/joinTeam")
+    public int joinTeam(@RequestParam("userID") String userID, @RequestParam("targetUserID") String targetUserID,
+                        @RequestParam("teamID") String teamID, @RequestParam("msgID") String msgID){
+        try {
+
+            return 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/refuseTeam")
+    public int refuseTeam(@RequestParam("userID") String userID, @RequestParam("targetUserID") String targetUserID,
+                          @RequestParam("teamID") String teamID, @RequestParam("msgID") String msgID){
+        try {
+
+            return 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
 
     @RequestMapping("/addTeam")
     public int addTeam(@RequestParam("userID") String userID, @RequestParam("teamName") String teamName)
