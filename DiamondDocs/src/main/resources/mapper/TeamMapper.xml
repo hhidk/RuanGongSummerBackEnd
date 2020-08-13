@@ -23,6 +23,12 @@
         where teamName like #{searchText};
     </select>
 
+    <select id="getCreatorIDByTeamID" parameterType="String" resultType="String">
+        select creatorID
+        from Team
+        where teamID = #{teamID};
+    </select>
+
     <update id="updateTeamName" parameterType="Map">
         update Team
         set teamName = #{teamName}

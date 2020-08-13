@@ -18,6 +18,12 @@
         <result column="createTime" property="createTime"/>
     </resultMap>
 
+    <insert id="addMessage" parameterType="Message">
+        insert
+        into Message (msgID, userID, targetUserID, msgContent, createTime, teamID, msgType)
+        VALUES (#{msgID}, #{userID}, #{targetUserID}, #{msgContent}, getdate(), #{teamID}, #{msgType});
+    </insert>
+
     <select id="getInvitationMsg" parameterType="String" resultMap="TeamMsgMap">
         select Message.msgID,Message.userID, Message.teamID, DocUser.userName, DocUser.imagePath, Team.teamName, Message.msgContent, Message.createTime
         from Message, Team, DocUser
