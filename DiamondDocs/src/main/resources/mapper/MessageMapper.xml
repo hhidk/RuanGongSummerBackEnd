@@ -5,6 +5,31 @@
 
 <mapper namespace="com.diamond.mapper.HistoryMapper">
 
+    <resultMap id="TeamMsgMap" type="TeamMessage">
+        <!-- id为主键 -->
+        <id column="msgID" property="msgID"/>
+        <!-- column是数据库表的列名 , property是对应实体类的属性名 -->
+        <result column="userID" property="userID"/>
+        <result column="teamID" property="teamID"/>
+        <result column="userName" property="userName"/>
+        <result column="imagePath" property="imagePath"/>
+        <result column="teamName" property="teamName"/>
+        <result column="msgContent" property="msgContent"/>
+        <result column="createTime" property="createTime"/>
+    </resultMap>
+
+    <select id="getInvitationMsg" parameterType="String" resultMap="TeamMsgMap">
+        select Message.msgID,Message.userID, Message.teamID, DocUser.userName, DocUser.imagePath, Team.teamName, Message.msgContent, Message.createTime
+        from Message, Team, DocUser
+        where Message.targetUserID = #{userID} and Message.teamID = Team.teamID and Message.userID = DocUser.userID and Message.msgType = 0;
+    </select>
+
+    <select id="getApplicationMsg" parameterType="String" resultMap="TeamMsgMap">
+        select Message.msgID,Message.userID, Message.teamID, DocUser.userName, DocUser.imagePath, Team.teamName, Message.msgContent, Message.createTime
+        from Message, Team, DocUser
+        where Message.targetUserID = #{userID} and Message.teamID = Team.teamID and Message.userID = DocUser.userID and Message.msgType = 1;
+    </select>
+
     <delete id="deleteMessage" parameterType="String">
         delete
         from Message
