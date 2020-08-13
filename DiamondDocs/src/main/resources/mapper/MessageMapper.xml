@@ -12,9 +12,9 @@
         <result column="userID" property="userID"/>
         <result column="teamID" property="teamID"/>
         <result column="userName" property="userName"/>
-        <result column="imagePath" property="imagePath"/>
+        <result column="imagePath" property="userImagePath"/>
         <result column="teamName" property="teamName"/>
-        <result column="msgContent" property="msgContent"/>
+        <result column="msgContent" property="content"/>
         <result column="createTime" property="createTime"/>
     </resultMap>
 

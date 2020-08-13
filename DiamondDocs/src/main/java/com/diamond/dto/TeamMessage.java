@@ -11,8 +11,8 @@ public class TeamMessage {
     String userID;
     String teamID;
     String userName;
-    String imagePath;
-    String teamName;
-    String msgContent;
+    String userImagePath;
+    String teamName;//前端
+    String content;//前端
     String createTime;
 }
