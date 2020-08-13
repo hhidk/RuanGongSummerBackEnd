@@ -1,9 +1,6 @@
 package com.diamond.service;
 
-import com.diamond.dto.DocPreview;
-import com.diamond.dto.DocUserPreview;
 import com.diamond.dto.SearchPreview;
-import com.diamond.dto.TeamPreview;
 import com.diamond.mapper.DocMapper;
 import com.diamond.mapper.DocUserMapper;
 import com.diamond.mapper.TeamMapper;
@@ -44,6 +41,7 @@ public class SearchService {
     }
 
     public List<SearchPreview> searchTeam(String keyword) {
+        List<Doc> list = new ArrayList<>();
         return null;
     }
 }
