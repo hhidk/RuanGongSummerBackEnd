@@ -19,7 +19,7 @@ public class TeamInfoService {
     @Autowired
     private MemberMapper memberMapper;
 
-    public int addTeam(String userID, String TeamName)
+    public int addTeam(String userID, String TeamName) throws Exception
     {
         Team team = new Team();
         String teamID = DiyUUID.generateTeamID();
@@ -31,7 +31,12 @@ public class TeamInfoService {
         return 0;
     }
 
-    public int quitTeam(String userID, String teamID)
+    public int setTeamName(String teamID, String teamName) throws Exception{
+
+        return 0;
+    }
+
+    public int quitTeam(String userID, String teamID) throws Exception
     {
         Map<String, Object> map = new HashMap<>();
         map.put("userID", userID);
@@ -40,13 +45,13 @@ public class TeamInfoService {
         return 0;
     }
 
-    public int disbandTeam(String teamID)
+    public int disbandTeam(String teamID) throws Exception
     {
         teamMapper.deleteTeam(teamID);
         return 0;
     }
 
-    public int setAdmin(String userID, String teamID, int userIdentity)
+    public int setAdmin(String userID, String teamID, int userIdentity) throws Exception
     {
         Map<String, Object> map = new HashMap<>();
         map.put("userID", userID);
