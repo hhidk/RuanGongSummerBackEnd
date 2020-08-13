@@ -1,5 +1,6 @@
 package com.diamond.mapper;
 
+import com.diamond.dto.DocPreview;
 import com.diamond.pojo.Doc;
 import com.diamond.pojo.Favorite;
 import org.apache.ibatis.annotations.Mapper;
@@ -16,7 +17,7 @@ public interface FavoriteMapper
     //key:docID, userID
     int addFavorite(Map<String, Object> map);
 
-    List<Doc> getFavoriteDocByUserID(@Param("userID") String userID);
+    List<DocPreview> getFavoriteDocByUserID(@Param("userID") String userID);
 
     //key:docID, userID
     int deleteFavorite(Map<String, Object> map);

@@ -11,10 +11,11 @@
         values (#{docID}, #{userID}, GETDATE());
     </insert>
 
-    <select id="getFavoriteDocByUserID" parameterType="String" resultType="Doc">
-        select *
-        from Doc
-        where docID in (select docID from Favorite where userID = #{userID})
+    <select id="getFavoriteDocByUserID" parameterType="String" resultType="DocPreview">
+        select Doc.docID, docTitle
+        from Doc,Favorite
+        where userID = #{userID} and Doc.docID = Favorite.docID
+        order by Favorite.createtime desc
     </select>
 
     <delete id="deleteFavorite" parameterType="Map">
