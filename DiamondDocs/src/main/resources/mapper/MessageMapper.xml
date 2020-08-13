@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.diamond.mapper.HistoryMapper">
+<mapper namespace="com.diamond.mapper.MessageMapper">
 
     <resultMap id="TeamMsgMap" type="TeamMessage">
         <!-- id为主键 -->
