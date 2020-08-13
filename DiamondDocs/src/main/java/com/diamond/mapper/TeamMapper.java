@@ -1,5 +1,6 @@
 package com.diamond.mapper;
 
+import com.diamond.pojo.DocUser;
 import com.diamond.pojo.Team;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,6 +26,8 @@ public interface TeamMapper {
     返回结果为团队列表
      */
     List<Team> getTeamByNameLike(@Param("searchText") String searchText);
+
+    String getCreatorIDByTeamID(@Param("teamID") String teamID);
 
     /*
     更新团队信息，只能修改团队名字

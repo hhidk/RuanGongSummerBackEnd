@@ -63,4 +63,22 @@ public class TeamInfoService {
         memberMapper.setAdmin(map);
         return 0;
     }
+
+    public void accpetMember(String userID, String teamID)
+    {
+        Member member = new Member();
+        member.setUserID(userID);
+        member.setTeamID(teamID);
+        member.setUserIdentity(0);
+        memberMapper.addMember(member);
+    }
+
+    public void joinTeam(String userID, String teamID)
+    {
+        Member member = new Member();
+        member.setUserID(userID);
+        member.setTeamID(teamID);
+        member.setUserIdentity(0);
+        memberMapper.addMember(member);
+    }
 }
