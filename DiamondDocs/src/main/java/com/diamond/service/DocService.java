@@ -22,7 +22,8 @@ public class DocService {
     private FavoriteMapper favoriteMapper;
 
     public DocPlus getDoc(String userID, String docID) throws Exception{
-        return null;
+        Doc doc = docMapper.getDocByDocID(docID);
+        return new DocPlus(doc);
     }
 
     public String addDoc(String userID, String teamID) throws Exception{
