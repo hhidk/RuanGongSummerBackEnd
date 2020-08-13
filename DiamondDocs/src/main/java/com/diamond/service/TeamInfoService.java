@@ -32,7 +32,10 @@ public class TeamInfoService {
     }
 
     public int setTeamName(String teamID, String teamName) throws Exception{
-
+        Map<String, Object> map = new HashMap<>();
+        map.put("teamID", teamID);
+        map.put("teamName", teamName);
+        teamMapper.updateTeamName(map);
         return 0;
     }
 

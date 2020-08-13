@@ -26,6 +26,17 @@ public class TeamInfoController {
         }
     }
 
+    @RequestMapping("/setTeamName")
+    public int setTeamName(@RequestParam("teamID") String teamID, @RequestParam("teamName") String teamName){
+        try {
+            return teamInfoService.setTeamName(teamID, teamName);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
     @RequestMapping("/quitTeam")
     public int quitTeam(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID)
     {
