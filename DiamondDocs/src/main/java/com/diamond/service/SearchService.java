@@ -30,6 +30,9 @@ public class SearchService {
         list.add(docUserMapper.getUserByID(keyword));
         list.add(docUserMapper.getUserByGithubID(keyword));
         list.addAll(docUserMapper.getDocUserByFuzzyQuery("%"+keyword+"%"));
+        if(list.isEmpty())
+            return null;
+        list = removeDuplicated(list);
         return SearchPreview.getUserList(list);
     }
 
@@ -37,6 +40,9 @@ public class SearchService {
         List<Doc> list = new ArrayList<>();
         list.add(docMapper.getDocByDocID(keyword));
         list.addAll(docMapper.getDocByDocTitle("%"+keyword+"%"));
+        if(list.isEmpty())
+            return null;
+        list = removeDuplicated(list);
         return SearchPreview.getDocList(list);
     }
 
@@ -44,6 +50,18 @@ public class SearchService {
         List<Team> list = new ArrayList<>();
         list.add(teamMapper.getTeamByTeamID(keyword));
         list.addAll(teamMapper.getTeamByNameLike("%"+keyword+"%"));
+        if(list.isEmpty())
+            return null;
+        list = removeDuplicated(list);
         return SearchPreview.getTeamList(list);
+    }
+
+    public List removeDuplicated(List list){
+        List newList = new ArrayList();
+        for (Object object : list){
+            if(!newList.contains(object) && object != null)
+                newList.add(object);
+        }
+        return newList;
     }
 }
