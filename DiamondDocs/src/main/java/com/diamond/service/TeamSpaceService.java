@@ -18,8 +18,6 @@ import java.util.List;
 public class TeamSpaceService {
 
     @Autowired
-    private TeamMapper teamMapper;
-    @Autowired
     private MemberMapper memberMapper;
 
     public List<TeamPreview> getMyTeam(String userID) throws Exception{
