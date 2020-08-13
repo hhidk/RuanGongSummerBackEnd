@@ -14,5 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemberPreview {
     String userName;
+    String emailAddress;
+    String imagePath;
     int userIdentity;
 }
