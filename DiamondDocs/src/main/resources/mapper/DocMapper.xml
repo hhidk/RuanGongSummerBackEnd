@@ -14,19 +14,31 @@
     <select id="getDocByDocID" parameterType="String" resultType="Doc">
         select *
         from Doc
-        where docID = #{docID};
+        where docID = #{docID} and isDeleted = 0;
     </select>
 
     <select id="getDocByDocTitle" parameterType="String" resultType="Doc">
         select *
         from Doc
-        where docTitle like #{docTitle};
+        where docTitle like #{docTitle} and isDeleted = 0;
     </select>
 
     <select id="getDocByTeamID" parameterType="String" resultType="Doc">
         select *
         from Doc
-        where teamID = #{teamID};
+        where teamID = #{teamID} and isDeleted = 0;
+    </select>
+
+    <select id="getDocByUserID" parameterType="String" resultType="Doc">
+        select *
+        from Doc
+        where creatorID = #{userID} and isDeleted = 0;
+    </select>
+
+    <select id="getDeletedDocByUserID" parameterType="String" resultType="Doc">
+        select *
+        from Doc
+        where creatorID = #{userID} and isDeleted = 1;
     </select>
 
     <select id="getDocDeleteState" parameterType="String" resultType="int">

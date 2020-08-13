@@ -42,7 +42,7 @@
     </select>
 
     <select id="getTeamMemberPreviewByTeamID" parameterType="String" resultType="MemberPreview">
-        select userName, userIdentity, emailAddress, imagePath
+        select DocUser.userID, userName, userIdentity, emailAddress, imagePath
         from Member,DocUser
         where Member.teamID = #{teamID} and Member.userID = DocUser.userID;
     </select>

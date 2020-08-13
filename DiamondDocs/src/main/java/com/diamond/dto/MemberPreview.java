@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class MemberPreview {
+    String userID;
     String userName;
     String emailAddress;
     String imagePath;

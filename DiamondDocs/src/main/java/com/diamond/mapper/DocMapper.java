@@ -21,6 +21,10 @@ public interface DocMapper
 
     List<Doc> getDocByTeamID(@Param("teamID") String teamID);
 
+    List<Doc> getDocByUserID(@Param("userID") String userID);
+
+    List<Doc> getDeletedDocByUserID(@Param("userID") String userID);
+
     int getDocDeleteState(@Param("docID") String docID);
 
     /*
