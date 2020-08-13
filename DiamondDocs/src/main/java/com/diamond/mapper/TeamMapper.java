@@ -18,6 +18,8 @@ public interface TeamMapper {
      */
     int createTeam(Team team);
 
+    Team getTeamByTeamID(@Param("teamID") String teamID);
+
     /*
     根据关键词搜索相关团队
     返回结果为团队列表

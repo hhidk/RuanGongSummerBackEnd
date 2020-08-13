@@ -41,7 +41,9 @@ public class SearchService {
     }
 
     public List<SearchPreview> searchTeam(String keyword) {
-        List<Doc> list = new ArrayList<>();
-        return null;
+        List<Team> list = new ArrayList<>();
+        list.add(teamMapper.getTeamByTeamID(keyword));
+        list.addAll(teamMapper.getTeamByNameLike("%"+keyword+"%"));
+        return SearchPreview.getTeamList(list);
     }
 }

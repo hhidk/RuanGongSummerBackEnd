@@ -11,6 +11,12 @@
         values (#{teamID}, #{teamName}, #{creatorID});
     </insert>
 
+    <select id="getTeamByTeamID" parameterType="String" resultType="Team">
+        select *
+        from Team
+        where teamID = #{teamID};
+    </select>
+
     <select id="getTeamByNameLike" parameterType="String" resultType="Team">
         select *
         from Team
