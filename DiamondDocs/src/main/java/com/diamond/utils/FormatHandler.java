@@ -16,7 +16,7 @@ public class FormatHandler {
             long min=((l/(60*1000))-day*24*60-hour*60);
             //long second=(l/1000-day*24*60*60-hour*60*60-min*60);
             if(day>3)
-                return sqltime.substring(0,10);
+                return sqltime.substring(0,16);
             else if(day>0)
                 return day+"天前";
             else if(hour>0)
