@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SearchService {
@@ -36,20 +38,28 @@ public class SearchService {
         return SearchPreview.getUserList(list);
     }
 
-    public List<SearchPreview> searchDoc(String keyword) {
+    public List<SearchPreview> searchDoc(String userID, String keyword) {
         List<Doc> list = new ArrayList<>();
         list.add(docMapper.getDocByDocID(keyword));
-        list.addAll(docMapper.getDocByDocTitle("%"+keyword+"%"));
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userID", userID);
+        map.put("keyword", keyword);
+        list.addAll(docMapper.getRelatedDocByUserID(map));
         if(list.isEmpty())
             return null;
         list = removeDuplicated(list);
         return SearchPreview.getDocList(list);
     }
 
-    public List<SearchPreview> searchTeam(String keyword) {
+    public List<SearchPreview> searchTeam(String userID, String keyword) {
         List<Team> list = new ArrayList<>();
         list.add(teamMapper.getTeamByTeamID(keyword));
-        list.addAll(teamMapper.getTeamByNameLike("%"+keyword+"%"));
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userID", userID);
+        map.put("keyword", keyword);
+        list.addAll(teamMapper.getRelatedTeamByUserID(map));
         if(list.isEmpty())
             return null;
         list = removeDuplicated(list);

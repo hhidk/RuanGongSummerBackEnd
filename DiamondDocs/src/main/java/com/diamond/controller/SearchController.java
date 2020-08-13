@@ -16,15 +16,33 @@ public class SearchController<T> {
     @Autowired
     private SearchService searchService;
 
+    @RequestMapping("/searchDoc")
+    public List<SearchPreview> searchDoc(String userID, String searchText){
+        try {
+            return searchService.searchDoc(userID, searchText);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/searchTeam")
+    public List<SearchPreview> searchTeam(String userID, String searchText){
+        try {
+            return searchService.searchTeam(userID, searchText);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+/*
     @RequestMapping("/searchAll")
     public List<SearchPreview> searchAll(String type, String searchText){
         try {
             if(type.equals("user"))
                 return searchService.searchUser(searchText);
-            else if(type.equals("team"))
-                return searchService.searchTeam(searchText);
-            else if(type.equals("doc"))
-                return searchService.searchDoc(searchText);
             else
                 return null;
         }
@@ -32,6 +50,6 @@ public class SearchController<T> {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 
 }

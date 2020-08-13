@@ -23,6 +23,13 @@
         where teamName like #{searchText};
     </select>
 
+    <select id="getRelatedTeamByUserID" parameterType="Map" resultType="Team">
+        select *
+        from Team
+        where Team.teamID in (select Member.teamID from Member where Member.userID = #{userID}) and
+              Team.teamName like #{keyword}
+    </select>
+
     <select id="getCreatorIDByTeamID" parameterType="String" resultType="String">
         select creatorID
         from Team
