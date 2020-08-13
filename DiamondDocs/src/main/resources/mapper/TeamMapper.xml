@@ -8,19 +8,25 @@
     <insert id="createTeam" parameterType="Team">
         insert
         into Team (teamID, teamName, creatorID)
-        values (#{teamID}, #{teamName}, #{creatorID})
+        values (#{teamID}, #{teamName}, #{creatorID});
     </insert>
+
+    <select id="getTeamByNameLike" parameterType="String" resultType="Team">
+        select *
+        from Team
+        where teamName like #{searchText};
+    </select>
 
     <update id="updateTeamName" parameterType="Map">
         update Team
         set teamName = #{teamName}
-        where teamID = #{teamID}
+        where teamID = #{teamID};
     </update>
 
     <delete id="deleteTeam" parameterType="String">
         delete
         from Team
-        where teamID = #{teamID}
+        where teamID = #{teamID};
     </delete>
 
 </mapper>

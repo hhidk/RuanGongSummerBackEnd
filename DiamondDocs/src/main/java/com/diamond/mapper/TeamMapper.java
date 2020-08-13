@@ -19,6 +19,12 @@ public interface TeamMapper {
     int createTeam(Team team);
 
     /*
+    根据关键词搜索相关团队
+    返回结果为团队列表
+     */
+    List<Team> getTeamByNameLike(@Param("searchText") String searchText);
+
+    /*
     更新团队信息，只能修改团队名字
     使用map传参，key分别为teamID和teamName
      */
