@@ -23,10 +23,10 @@
         where teamName like #{searchText};
     </select>
 
-    <select id="getRelatedTeamByUserID" parameterType="Map" resultType="Team">
+    <select id="getNotRelatedTeamByUserID" parameterType="Map" resultType="Team">
         select *
         from Team
-        where Team.teamID in (select Member.teamID from Member where Member.userID = #{userID}) and
+        where Team.teamID not in (select Member.teamID from Member where Member.userID = #{userID}) and
               Team.teamName like #{keyword}
     </select>
 

@@ -87,7 +87,7 @@ public class SearchService {
         Map<String, Object> map = new HashMap<>();
         map.put("userID", userID);
         map.put("keyword", "%"+keyword+"%");
-        list.addAll(teamMapper.getRelatedTeamByUserID(map));
+        list.addAll(teamMapper.getNotRelatedTeamByUserID(map));
         if(list.isEmpty())
             return null;
         list = removeDuplicated(list);
