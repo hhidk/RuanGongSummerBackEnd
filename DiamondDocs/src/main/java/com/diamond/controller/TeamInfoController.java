@@ -18,7 +18,8 @@ public class TeamInfoController {
     private MessageService messageService;
 
     @RequestMapping("/applyTeam")
-    public int applyTeam(@RequestParam("userID") String userID, @RequestParam("targetTeamID") String teamID, @RequestParam("content") String msgContent){
+    public int applyTeam(@RequestParam("userID") String userID, @RequestParam("targetTeamID") String teamID,
+                         @RequestParam("content") String msgContent){
         try {
             messageService.applyTeam(userID, teamID, msgContent);
             return 0;
@@ -33,9 +34,8 @@ public class TeamInfoController {
     public int acceptMember(@RequestParam("userID") String userID, @RequestParam("targetUserID") String targetUserID,
                             @RequestParam("teamID") String teamID, @RequestParam("msgID") String msgID){
         try {
-            messageService.acceptMember(userID,targetUserID,teamID);
+            messageService.acceptMember(userID,targetUserID,teamID, msgID);
             teamInfoService.acceptMember(targetUserID,teamID);
-            messageService.deleteMsg(msgID);
             return 0;
         }
         catch (Exception e){
@@ -48,8 +48,7 @@ public class TeamInfoController {
     public int refuseMember(@RequestParam("userID") String userID, @RequestParam("targetUserID") String targetUserID,
                             @RequestParam("teamID") String teamID, @RequestParam("msgID") String msgID){
         try {
-            messageService.refuseMember(userID,targetUserID,teamID);
-            messageService.deleteMsg(msgID);
+            messageService.refuseMember(userID,targetUserID,teamID, msgID);
             return 0;
         }
         catch (Exception e){
@@ -75,9 +74,8 @@ public class TeamInfoController {
     public int joinTeam(@RequestParam("userID") String userID, @RequestParam("targetUserID") String targetUserID,
                         @RequestParam("teamID") String teamID, @RequestParam("msgID") String msgID){
         try {
-            messageService.joinTeam(userID,targetUserID,teamID);
+            messageService.joinTeam(userID,targetUserID,teamID, msgID);
             teamInfoService.joinTeam(userID,teamID);
-            messageService.deleteMsg(msgID);
             return 0;
         }
         catch (Exception e){
@@ -90,8 +88,7 @@ public class TeamInfoController {
     public int refuseTeam(@RequestParam("userID") String userID, @RequestParam("targetUserID") String targetUserID,
                           @RequestParam("teamID") String teamID, @RequestParam("msgID") String msgID){
         try {
-            messageService.refuseTeam(userID,targetUserID,teamID);
-            messageService.deleteMsg(msgID);
+            messageService.refuseTeam(userID,targetUserID,teamID, msgID);
             return 0;
         }
         catch (Exception e){

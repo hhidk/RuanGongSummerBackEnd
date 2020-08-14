@@ -43,7 +43,7 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
-    public void acceptMember(String userID, String targetUserID, String teamID) throws Exception
+    public void acceptMember(String userID, String targetUserID, String teamID, String msgID) throws Exception
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
@@ -54,9 +54,14 @@ public class MessageService {
         message.setTargetUserID(targetUserID);
 
         messageMapper.addMessage(message);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("msgID", msgID);
+        map.put("type", 1);
+        messageMapper.setMsgReadState(map);
     }
 
-    public void refuseMember(String userID, String targetUserID, String teamID) throws Exception
+    public void refuseMember(String userID, String targetUserID, String teamID, String msgID) throws Exception
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
@@ -67,6 +72,11 @@ public class MessageService {
         message.setTargetUserID(targetUserID);
 
         messageMapper.addMessage(message);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("msgID", msgID);
+        map.put("type", 2);
+        messageMapper.setMsgReadState(map);
     }
 
     public void inviteMember(String userID, String teamID, String targetUserID, String content) throws Exception
@@ -82,7 +92,7 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
-    public void joinTeam(String userID, String targetUserID, String teamID) throws Exception
+    public void joinTeam(String userID, String targetUserID, String teamID, String msgID) throws Exception
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
@@ -93,9 +103,14 @@ public class MessageService {
         message.setTargetUserID(targetUserID);
 
         messageMapper.addMessage(message);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("msgID", msgID);
+        map.put("type", 1);
+        messageMapper.setMsgReadState(map);
     }
 
-    public void refuseTeam(String userID, String targetUserID, String teamID) throws Exception
+    public void refuseTeam(String userID, String targetUserID, String teamID, String msgID) throws Exception
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
@@ -106,6 +121,11 @@ public class MessageService {
         message.setTargetUserID(targetUserID);
 
         messageMapper.addMessage(message);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("msgID", msgID);
+        map.put("type", 2);
+        messageMapper.setMsgReadState(map);
     }
 
     public void quitTeam(String userID, String teamID) throws Exception
