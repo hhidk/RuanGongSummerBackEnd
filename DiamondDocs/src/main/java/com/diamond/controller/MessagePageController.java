@@ -1,5 +1,6 @@
 package com.diamond.controller;
 
+import com.diamond.dto.SystemMessage;
 import com.diamond.dto.TeamMessage;
 import com.diamond.mapper.MessageMapper;
 import com.diamond.service.MessageService;
@@ -23,6 +24,18 @@ public class MessagePageController {
     {
         try {
             return messageService.getCommonMsg(type, userID);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/getSystemMsg")
+    public List<SystemMessage> getSystemMsg(@RequestParam("userID") String userID)
+    {
+        try {
+            return messageService.getSystemMsg(userID);
         }
         catch (Exception e){
             e.printStackTrace();
