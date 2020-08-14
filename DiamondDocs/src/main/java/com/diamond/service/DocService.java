@@ -2,8 +2,10 @@ package com.diamond.service;
 
 import com.diamond.dto.DocPlus;
 import com.diamond.dto.DocPreview;
+import com.diamond.mapper.BrowsesMapper;
 import com.diamond.mapper.DocMapper;
 import com.diamond.mapper.FavoriteMapper;
+import com.diamond.pojo.Browses;
 import com.diamond.pojo.Doc;
 import com.diamond.pojo.Favorite;
 import com.diamond.utils.DiyUUID;
@@ -21,7 +23,7 @@ public class DocService {
     @Autowired
     private FavoriteMapper favoriteMapper;
 
-    public DocPlus getDoc(String userID, String docID) throws Exception{
+    public DocPlus getDoc(String docID) throws Exception{
         Doc doc = docMapper.getDocByDocID(docID);
         return new DocPlus(doc);
     }

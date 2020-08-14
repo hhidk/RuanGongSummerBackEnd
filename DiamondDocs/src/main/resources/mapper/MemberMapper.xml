@@ -23,6 +23,12 @@
         where userID = #{userID}
     </update>
 
+    <update id="updateLastVisitTime" parameterType="String">
+        update Member
+        set lastVisitTime = getdate()
+        where userID = #{userID} and teamID = #{teamID}
+    </update>
+
     <select id="getDocUserIdentity" parameterType="String" resultType="int">
         select userIdentity
         from Member
@@ -36,9 +42,10 @@
     </select>
 
     <select id="getTeamByUserID" parameterType="String" resultType="Team">
-        select *
-        from Team
-        where Team.teamID in (select Member.teamID from Member where Member.userID = #{userID});
+        select Team.teamID, teamName, creatorID
+        from Team, Member
+        where Member.userID = #{userID}) and Team.teamID = Member.teamID
+        order by lastVisitTime desc
     </select>
 
     <select id="getTeamMemberByTeamID" parameterType="String" resultType="DocUser">
