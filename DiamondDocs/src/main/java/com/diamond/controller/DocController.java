@@ -22,20 +22,6 @@ public class DocController {
     private DocService docService;
     @Autowired
     private HistoryService historyService;
-    @Autowired
-    private BrowsesService browsesService;
-
-    @RequestMapping("/getDoc")
-    public DocPlus getDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
-        try {
-            browsesService.browseDoc(userID, docID);
-            return docService.getDoc(docID);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     @RequestMapping("/addDoc")
     public String addDoc(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID){
@@ -56,22 +42,6 @@ public class DocController {
         try {
             docService.editDocTitle(docID,docTitle);
             historyService.editDocTitle(userID,docID);
-            return 0;
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return 1;
-        }
-    }
-
-    @RequestMapping("/editDoc")
-    public int editDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID,
-                          @RequestParam("docTitle") String docTitle, @RequestParam("docContent") String docContent,
-                          @RequestParam("docLimit") int docLimit){
-        try {
-            docService.editDoc(docID,docTitle,docContent,docLimit);
-            historyService.editDoc(userID,docID);
-
             return 0;
         }
         catch (Exception e){
