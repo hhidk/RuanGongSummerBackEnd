@@ -5,22 +5,40 @@
 
 <mapper namespace="com.diamond.mapper.CommentMapper">
 
+    <resultMap id="CommentPlusMap" type="CommentPlus">
+        <!-- id为主键 -->
+        <id column="commentID" property="commentID"/>
+        <!-- column是数据库表的列名 , property是对应实体类的属性名 -->
+        <result column="userID" property="userID"/>
+        <result column="commentContent" property="commentContent"/>
+        <result column="createTime" property="createTime"/>
+        <result column="userName" property="userName"/>
+        <result column="imagePath" property="imagePath"/>
+        <association property="reply" column="{commentID=replyID}" javaType="Comment" select="getCommentByCommentID"/>
+    </resultMap>
+
     <insert id="addComment" parameterType="Comment">
         insert
         into Comment (commentID, docID, userID, createTime, commentContent)
         values (#{commentID}, #{docID}, #{userID}, GETDATE(), #{commentContent});
     </insert>
 
-    <select id="getCommentByDocID" parameterType="String" resultType="Comment">
+    <select id="getCommentByCommentID" parameterType="String" resultType="Comment">
         select *
         from Comment
-        where docID = #{docID};
+        where commentID = #{commentID};
     </select>
 
-    <select id="getCommentByUserID" parameterType="String" resultType="Comment">
-        select *
-        from Comment
-        where userID = #{userID};
+    <select id="getCommentByDocID" parameterType="String" resultMap="CommentPlusMap">
+        select commentID, Comment.userID, commentContent, createTime, userName, imagePath, replyID
+        from Comment, DocUser
+        where docID = #{docID} and Comment.userID = DocUser.userID;
+    </select>
+
+    <select id="getCommentByUserID" parameterType="String" resultMap="CommentPlusMap">
+        select commentID, Comment.userID, commentContent, createTime, userName, imagePath, replyID
+        from Comment, DocUser
+        where Comment.userID = #{userID} and DocUser.userID = Comment.userID;
     </select>
 
     <delete id="deleteComment" parameterType="String">

@@ -10,5 +10,6 @@ public class Comment
     private String userID;
     private String createTime;
     private String commentContent;
+    private String replyID;
 
 }

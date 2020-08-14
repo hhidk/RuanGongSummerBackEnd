@@ -1,5 +1,6 @@
 package com.diamond.mapper;
 
+import com.diamond.dto.CommentPlus;
 import com.diamond.pojo.Comment;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -13,9 +14,9 @@ public interface CommentMapper
 
     int addComment(Comment comment);
 
-    List<Comment> getCommentByDocID(String docID);
+    List<CommentPlus> getCommentByDocID(String docID);
 
-    List<Comment> getCommentByUserID(String userID);
+    List<CommentPlus> getCommentByUserID(String userID);
 
     int deleteComment(String commentID);
 

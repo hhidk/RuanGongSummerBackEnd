@@ -28,4 +28,10 @@ public class DiyUUID {
                 .substring(0,10).toUpperCase();
     }
 
+    public static String generateCommentID(){
+        return UUID.randomUUID().toString()
+                .replace("-","")
+                .substring(0,10).toUpperCase();
+    }
+
 }
