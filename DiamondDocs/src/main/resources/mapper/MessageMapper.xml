@@ -80,7 +80,7 @@
         order by createTime desc;
     </select>
 
-    <update id="setMsgReadState" parameterType="String">
+    <update id="setMsgReadState" parameterType="Map">
         update Message
         set isRead = #{type}
         where msgID = #{msgID};
