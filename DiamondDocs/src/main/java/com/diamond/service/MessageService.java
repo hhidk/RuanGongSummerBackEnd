@@ -57,7 +57,7 @@ public class MessageService {
 
         Map<String, Object> map = new HashMap<>();
         map.put("msgID", msgID);
-        map.put("type", 1);
+        map.put("type", 2);
         messageMapper.setMsgReadState(map);
     }
 
@@ -75,7 +75,7 @@ public class MessageService {
 
         Map<String, Object> map = new HashMap<>();
         map.put("msgID", msgID);
-        map.put("type", 2);
+        map.put("type", 3);
         messageMapper.setMsgReadState(map);
     }
 
@@ -106,7 +106,7 @@ public class MessageService {
 
         Map<String, Object> map = new HashMap<>();
         map.put("msgID", msgID);
-        map.put("type", 1);
+        map.put("type", 2);
         messageMapper.setMsgReadState(map);
     }
 
@@ -124,7 +124,7 @@ public class MessageService {
 
         Map<String, Object> map = new HashMap<>();
         map.put("msgID", msgID);
-        map.put("type", 2);
+        map.put("type", 3);
         messageMapper.setMsgReadState(map);
     }
 
