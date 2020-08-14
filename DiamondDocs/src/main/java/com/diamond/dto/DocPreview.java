@@ -17,10 +17,12 @@ import java.util.List;
 public class DocPreview {
     String docID;
     String docTitle;
+    String creatorID;
 
     public DocPreview(Doc doc){
         this.docID = doc.getDocID();
         this.docTitle = doc.getDocTitle();
+        this.creatorID = doc.getCreatorID();
     }
 
     public static List<DocPreview> getPreviewList(List<Doc> docList){

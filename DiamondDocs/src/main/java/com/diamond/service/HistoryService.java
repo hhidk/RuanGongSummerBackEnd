@@ -5,6 +5,8 @@ import com.diamond.pojo.History;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class HistoryService {
 
@@ -54,6 +56,12 @@ public class HistoryService {
         history.setUserID(userID);
         history.setOperation(4);
         historyMapper.addHistory(history);
+    }
+
+    public void batchDeleteDoc(String userID, List<String> docIDs) throws Exception{
+        for(String docID : docIDs) {
+            deleteDoc(userID, docID);
+        }
     }
 
 }

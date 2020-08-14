@@ -2,8 +2,10 @@ package com.diamond.service;
 
 import com.diamond.dto.DocPlus;
 import com.diamond.dto.DocPreview;
+import com.diamond.mapper.BrowsesMapper;
 import com.diamond.mapper.DocMapper;
 import com.diamond.mapper.FavoriteMapper;
+import com.diamond.pojo.Browses;
 import com.diamond.pojo.Doc;
 import com.diamond.pojo.Favorite;
 import com.diamond.utils.DiyUUID;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -21,7 +24,7 @@ public class DocService {
     @Autowired
     private FavoriteMapper favoriteMapper;
 
-    public DocPlus getDoc(String userID, String docID) throws Exception{
+    public DocPlus getDoc(String docID) throws Exception{
         Doc doc = docMapper.getDocByDocID(docID);
         return new DocPlus(doc);
     }
@@ -87,5 +90,17 @@ public class DocService {
         map.put("docID", docID);
         favoriteMapper.addFavorite(map);
 
+    }
+
+    public void batchDeleteDoc(List<String> docIDs) throws Exception{
+        for(String docID : docIDs) {
+            deleteDoc(docID);
+        }
+    }
+
+    public void batchCollectDoc(String userID, List<String> docIDs) throws Exception{
+        for(String docID : docIDs) {
+            collectDoc(userID, docID);
+        }
     }
 }

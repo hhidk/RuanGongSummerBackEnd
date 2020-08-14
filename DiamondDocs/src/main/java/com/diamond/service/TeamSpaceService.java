@@ -35,6 +35,7 @@ public class TeamSpaceService {
     }
 
     public int getUserIdentity(String userID, String teamID) throws Exception {
+        memberMapper.updateLastVisitTime(userID, teamID);
         return memberMapper.getDocUserIdentity(userID, teamID);
     }
 }

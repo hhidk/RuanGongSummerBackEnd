@@ -2,6 +2,7 @@ package com.diamond.controller;
 
 import com.diamond.dto.DocPlus;
 import com.diamond.dto.DocPreview;
+import com.diamond.service.BrowsesService;
 import com.diamond.service.DocService;
 import com.diamond.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,21 +12,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*",maxAge = 3600)
 public class DocController {
 
     @Autowired
     private DocService docService;
-    //和文档表相关的内容
     @Autowired
     private HistoryService historyService;
-    //和历史记录相关的内容，两个拆开来清晰一点，controller分别调用这两个service的方法
+    @Autowired
+    private BrowsesService browsesService;
 
     @RequestMapping("/getDoc")
     public DocPlus getDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
         try {
-            return docService.getDoc(userID,docID);
+            browsesService.browseDoc(userID, docID);
+            return docService.getDoc(docID);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -106,6 +110,31 @@ public class DocController {
     public int collectDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
         try {
             docService.collectDoc(userID, docID);
+            return 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/docBatchDelete")
+    public int batchdDeleteDoc(@RequestParam("userID") String userID, @RequestParam("docIDs") List<String> docIDs){
+        try {
+            docService.batchDeleteDoc(docIDs);
+            historyService.batchDeleteDoc(userID,docIDs);
+            return 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/docBatchFavorite")
+    public int batchCollectDoc(@RequestParam("userID") String userID, @RequestParam("docIDs") List<String> docIDs){
+        try {
+            docService.batchCollectDoc(userID, docIDs);
             return 0;
         }
         catch (Exception e){

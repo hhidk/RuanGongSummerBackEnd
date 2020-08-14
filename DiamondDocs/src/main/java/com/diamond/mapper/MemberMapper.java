@@ -33,6 +33,11 @@ public interface MemberMapper {
     int updateDocUserIdentity(Map<String, Object> map);
 
     /*
+    修改用户最近访问该组文档的时间
+     */
+    int updateLastVisitTime(@Param("userID") String userID, @Param("teamID") String teamID);
+
+    /*
     查询用户身份
      */
     int getDocUserIdentity(String userID, String teamID);
