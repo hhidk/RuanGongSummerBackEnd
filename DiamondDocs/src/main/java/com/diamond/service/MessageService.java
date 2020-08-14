@@ -1,11 +1,10 @@
 package com.diamond.service;
 
+import com.diamond.dto.CommentMessage;
 import com.diamond.dto.SystemMessage;
 import com.diamond.dto.TeamMessage;
-import com.diamond.mapper.DocMapper;
-import com.diamond.mapper.DocUserMapper;
-import com.diamond.mapper.MessageMapper;
-import com.diamond.mapper.TeamMapper;
+import com.diamond.mapper.*;
+import com.diamond.pojo.Doc;
 import com.diamond.pojo.Message;
 import com.diamond.utils.DiyUUID;
 import com.diamond.utils.FormatHandler;
@@ -13,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MessageService {
@@ -26,6 +27,8 @@ public class MessageService {
     private DocUserMapper docUserMapper;
     @Autowired
     private DocMapper docMapper;
+    @Autowired
+    private CommentMapper commentMapper;
 
     public void applyTeam(String userID, String targetTeamID, String content) throws Exception
     {
@@ -40,7 +43,7 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
-    public void acceptMember(String userID, String targetUserID, String teamID)
+    public void acceptMember(String userID, String targetUserID, String teamID) throws Exception
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
@@ -53,7 +56,7 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
-    public void refuseMember(String userID, String targetUserID, String teamID)
+    public void refuseMember(String userID, String targetUserID, String teamID) throws Exception
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
@@ -66,7 +69,7 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
-    public void inviteMember(String userID, String teamID, String targetUserID, String content)
+    public void inviteMember(String userID, String teamID, String targetUserID, String content) throws Exception
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
@@ -79,7 +82,7 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
-    public void joinTeam(String userID, String targetUserID, String teamID)
+    public void joinTeam(String userID, String targetUserID, String teamID) throws Exception
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
@@ -92,7 +95,7 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
-    public void refuseTeam(String userID, String targetUserID, String teamID)
+    public void refuseTeam(String userID, String targetUserID, String teamID) throws Exception
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
@@ -105,7 +108,7 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
-    public void quitTeam(String userID, String teamID)
+    public void quitTeam(String userID, String teamID) throws Exception
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
@@ -118,7 +121,7 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
-    public void dismissMember(String userID, String targetUserID, String teamID)
+    public void dismissMember(String userID, String targetUserID, String teamID) throws Exception
     {
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
@@ -137,18 +140,42 @@ public class MessageService {
         if(type == 0)
         {
             list = messageMapper.getInvitationMsg(userID);
-            for (TeamMessage teamMessage : list)
-            {
-                teamMessage.setCreateTime(FormatHandler.AlterTimeFormat(teamMessage.getCreateTime()));
-            }
         }
         else if(type == 1)
         {
             list = messageMapper.getApplicationMsg(userID);
-            for (TeamMessage teamMessage : list)
+        }
+        for (TeamMessage teamMessage : list)
+        {
+            teamMessage.setCreateTime(FormatHandler.AlterTimeFormat(teamMessage.getCreateTime()));
+            Map<String, Object> map = new HashMap<>();
+            map.put("msgID", teamMessage.getMsgID());
+            map.put("type", 1);
+            messageMapper.setMsgReadState(map);
+        }
+        return list;
+    }
+
+    public List<CommentMessage> getCommentMsg(String userID) throws Exception
+    {
+        List<CommentMessage> list = new ArrayList<>();
+        list = messageMapper.getCommentMsg(userID);
+        for (CommentMessage commentMessage : list)
+        {
+            commentMessage.setCreateTime(FormatHandler.AlterTimeFormat(commentMessage.getCreateTime()));
+            if (commentMessage.getMsgType() == 9)
             {
-                teamMessage.setCreateTime(FormatHandler.AlterTimeFormat(teamMessage.getCreateTime()));
+                commentMessage.setContent(docMapper.getDocByDocID(commentMessage.getID()).getDocTitle());
             }
+            else if (commentMessage.getMsgType() == 10)
+            {
+                commentMessage.setContent(commentMapper.getCommentByCommentID(commentMessage.getID()).getCommentContent());
+            }
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("msgID", commentMessage.getMsgID());
+            map.put("type", 1);
+            messageMapper.setMsgReadState(map);
         }
         return list;
     }
@@ -172,7 +199,11 @@ public class MessageService {
             {
                 systemMessage.setName(docUserMapper.getUserByID(messageMapper.getMsgByMsgID(systemMessage.getMsgID()).getUserID()).getUserName());
             }
-            messageMapper.setMsgReadState(systemMessage.getMsgID());
+
+            Map<String, Object> map = new HashMap<>();
+            map.put("msgID", systemMessage.getMsgID());
+            map.put("type", 1);
+            messageMapper.setMsgReadState(map);
         }
         return list;
     }

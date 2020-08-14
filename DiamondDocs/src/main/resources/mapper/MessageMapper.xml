@@ -18,6 +18,19 @@
         <result column="createTime" property="createTime"/>
     </resultMap>
 
+    <resultMap id="CommentMsgMap" type="CommentMessage">
+        <!-- id为主键 -->
+        <id column="msgID" property="msgID"/>
+        <!-- column是数据库表的列名 , property是对应实体类的属性名 -->
+        <result column="userID" property="userID"/>
+        <result column="userName" property="userName"/>
+        <result column="imagePath" property="imagePath"/>
+        <result column="msgType" property="msgType"/>
+        <result column="teamID" property="ID"/>
+        <result column="createTime" property="createTime"/>
+        <result column="isRead" property="isRead"/>
+    </resultMap>
+
     <resultMap id="SystemMsgMap" type="SystemMessage">
         <!-- id为主键 -->
         <id column="msgID" property="msgID"/>
@@ -42,24 +55,34 @@
     <select id="getInvitationMsg" parameterType="String" resultMap="TeamMsgMap">
         select Message.msgID,Message.userID, Message.teamID, DocUser.userName, DocUser.imagePath, Team.teamName, Message.msgContent, Message.createTime
         from Message, Team, DocUser
-        where Message.targetUserID = #{userID} and Message.teamID = Team.teamID and Message.userID = DocUser.userID and Message.msgType = 0;
+        where Message.targetUserID = #{userID} and Message.teamID = Team.teamID and Message.userID = DocUser.userID and Message.msgType = 0
+        order by createTime desc;
     </select>
 
     <select id="getApplicationMsg" parameterType="String" resultMap="TeamMsgMap">
         select Message.msgID,Message.userID, Message.teamID, DocUser.userName, DocUser.imagePath, Team.teamName, Message.msgContent, Message.createTime
         from Message, Team, DocUser
-        where Message.targetUserID = #{userID} and Message.teamID = Team.teamID and Message.userID = DocUser.userID and Message.msgType = 1;
+        where Message.targetUserID = #{userID} and Message.teamID = Team.teamID and Message.userID = DocUser.userID and Message.msgType = 1
+        order by createTime desc;
+    </select>
+
+    <select id="getCommentMsg" parameterType="String" resultMap="CommentMsgMap">
+        select msgID, DocUser.userID, userName, imagePath, msgType, createTime, isRead, teamID
+        from Message, DocUser
+        where Message.targetUserID = #{userID} and DocUser.userID = Message.userID
+        order by createTime desc;
     </select>
 
     <select id="getSystemMsg" parameterType="String" resultMap="SystemMsgMap">
         select msgID, msgType, createTime, isRead
         from Message
         where targetUserID = #{userID} and (msgType = 3 or msgType = 4 or msgType = 5 or msgType = 6 or msgType = 7 or msgType = 8 or msgType = 11)
+        order by createTime desc;
     </select>
 
     <update id="setMsgReadState" parameterType="String">
         update Message
-        set isRead = 1
+        set isRead = #{type}
         where msgID = #{msgID};
     </update>
 
