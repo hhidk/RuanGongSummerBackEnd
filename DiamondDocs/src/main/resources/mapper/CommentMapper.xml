@@ -14,19 +14,20 @@
         <result column="createTime" property="createTime"/>
         <result column="userName" property="userName"/>
         <result column="imagePath" property="imagePath"/>
-        <association property="reply" column="{commentID=replyID}" javaType="Comment" select="getCommentByCommentID"/>
+        <result column="replyID" property="replyID"/>
+        <!--<association property="reply" column="{commentID=replyID}" javaType="Comment" select="getCommentByCommentID"/>-->
     </resultMap>
 
     <insert id="addComment" parameterType="Comment">
         insert
-        into Comment (commentID, docID, userID, createTime, commentContent)
-        values (#{commentID}, #{docID}, #{userID}, GETDATE(), #{commentContent});
+        into Comment (commentID, docID, userID, createTime, commentContent, replyID)
+        values (#{commentID}, #{docID}, #{userID}, GETDATE(), #{commentContent}, #{replyID});
     </insert>
 
-    <select id="getCommentByCommentID" parameterType="String" resultType="Comment">
-        select *
-        from Comment
-        where commentID = #{commentID};
+    <select id="getCommentByCommentID" parameterType="String" resultMap="CommentPlusMap">
+        select commentID, Comment.userID, commentContent, createTime, userName, imagePath, replyID
+        from Comment, DocUser
+        where commentID = #{commentID} and Comment.userID = DocUser.userID;
     </select>
 
     <select id="getCommentByDocID" parameterType="String" resultMap="CommentPlusMap">

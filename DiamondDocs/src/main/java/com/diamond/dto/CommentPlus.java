@@ -12,5 +12,6 @@ public class CommentPlus
     String createTime;
     String userName;
     String imagePath;
-    Comment reply;
+    String replyID;
+    CommentPlus reply;
 }

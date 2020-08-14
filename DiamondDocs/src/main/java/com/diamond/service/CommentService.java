@@ -25,6 +25,8 @@ public class CommentService {
         comment.setDocID(docID);
         comment.setUserID(userID);
         comment.setCommentContent(commentContent);
+        if(!replyID.equals("0"))
+            comment.setReplyID(replyID);
         commentMapper.addComment(comment);
         return 0;
     }
@@ -34,6 +36,9 @@ public class CommentService {
         List<CommentPlus> list = commentMapper.getCommentByDocID(docID);
         for (CommentPlus commentPlus : list)
         {
+            String replyID = commentPlus.getReplyID();
+            if(replyID != null)
+                commentPlus.setReply(commentMapper.getCommentByCommentID(replyID));
             commentPlus.setCreateTime(FormatHandler.AlterTimeFormat(commentPlus.getCreateTime()));
         }
         return list;
@@ -44,6 +49,9 @@ public class CommentService {
         List<CommentPlus> list = commentMapper.getCommentByUserID(userID);
         for (CommentPlus commentPlus : list)
         {
+            String replyID = commentPlus.getReplyID();
+            if(replyID != null)
+                commentPlus.setReply(commentMapper.getCommentByCommentID(replyID));
             commentPlus.setCreateTime(FormatHandler.AlterTimeFormat(commentPlus.getCreateTime()));
         }
         return list;

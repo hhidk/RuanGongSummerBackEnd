@@ -14,6 +14,8 @@ public interface CommentMapper
 
     int addComment(Comment comment);
 
+    CommentPlus getCommentByCommentID(String commentID);
+
     List<CommentPlus> getCommentByDocID(String docID);
 
     List<CommentPlus> getCommentByUserID(String userID);
