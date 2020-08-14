@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -89,5 +90,17 @@ public class DocService {
         map.put("docID", docID);
         favoriteMapper.addFavorite(map);
 
+    }
+
+    public void batchDeleteDoc(List<String> docIDs) throws Exception{
+        for(String docID : docIDs) {
+            deleteDoc(docID);
+        }
+    }
+
+    public void batchCollectDoc(String userID, List<String> docIDs) throws Exception{
+        for(String docID : docIDs) {
+            collectDoc(userID, docID);
+        }
     }
 }
