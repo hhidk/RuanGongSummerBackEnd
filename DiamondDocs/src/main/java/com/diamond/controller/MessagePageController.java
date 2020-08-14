@@ -1,5 +1,6 @@
 package com.diamond.controller;
 
+import com.diamond.dto.CommentMessage;
 import com.diamond.dto.SystemMessage;
 import com.diamond.dto.TeamMessage;
 import com.diamond.mapper.MessageMapper;
@@ -24,6 +25,18 @@ public class MessagePageController {
     {
         try {
             return messageService.getCommonMsg(type, userID);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/getCommentMsg")
+    public List<CommentMessage> getCommentMsg(@RequestParam("userID") String userID)
+    {
+        try {
+            return messageService.getCommentMsg(userID);
         }
         catch (Exception e){
             e.printStackTrace();
