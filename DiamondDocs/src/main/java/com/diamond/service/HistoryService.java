@@ -1,5 +1,6 @@
 package com.diamond.service;
 
+import com.diamond.mapper.DocMapper;
 import com.diamond.mapper.HistoryMapper;
 import com.diamond.pojo.History;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -10,7 +10,7 @@ public class MyWebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("/docimage/**").addResourceLocations("file:/root/docimages/");
+        registry.addResourceHandler("/docimages/**").addResourceLocations("file:/root/docimages/");
         registry.addResourceHandler("/IceCent/**").addResourceLocations("file:/root/IceCent/");
     }
 }

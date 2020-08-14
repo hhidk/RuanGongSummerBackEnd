@@ -34,4 +34,10 @@ public class DiyUUID {
                 .substring(0,10).toUpperCase();
     }
 
+    public static String generateImageID(){
+        return UUID.randomUUID().toString()
+                .replace("-","")
+                .substring(0,4).toUpperCase();
+    }
+
 }

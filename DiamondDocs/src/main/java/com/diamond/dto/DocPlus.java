@@ -7,9 +7,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class DocPlus {
-    //具体有啥得看前端的需求
     String docID;
     String docTitle;
+    String docContent;
+    String lastEditTime;
+    int docLimit;
+    int editState;
+    String creatorID;
+
+    String name;
 
     public DocPlus(Doc doc){
         this.docID = doc.getDocID();
