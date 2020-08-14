@@ -15,4 +15,5 @@ public class TeamMessage {
     String teamName;//前端
     String content;//前端
     String createTime;
+    int isRead;
 }

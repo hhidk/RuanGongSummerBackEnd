@@ -12,4 +12,5 @@ public class Message
     String createTime;
     String teamID;
     int msgType;
+    int isRead;
 }

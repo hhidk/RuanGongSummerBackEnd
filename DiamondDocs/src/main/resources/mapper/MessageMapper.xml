@@ -18,11 +18,26 @@
         <result column="createTime" property="createTime"/>
     </resultMap>
 
+    <resultMap id="SystemMsgMap" type="SystemMessage">
+        <!-- id为主键 -->
+        <id column="msgID" property="msgID"/>
+        <!-- column是数据库表的列名 , property是对应实体类的属性名 -->
+        <result column="msgType" property="msgType"/>
+        <result column="createTime" property="createTime"/>
+        <result column="isRead" property="isRead"/>
+    </resultMap>
+
     <insert id="addMessage" parameterType="Message">
         insert
-        into Message (msgID, userID, targetUserID, msgContent, createTime, teamID, msgType)
-        VALUES (#{msgID}, #{userID}, #{targetUserID}, #{msgContent}, getdate(), #{teamID}, #{msgType});
+        into Message (msgID, userID, targetUserID, msgContent, createTime, teamID, msgType, isRead)
+        VALUES (#{msgID}, #{userID}, #{targetUserID}, #{msgContent}, getdate(), #{teamID}, #{msgType}, 0);
     </insert>
+
+    <select id="getMsgByMsgID" parameterType="String" resultType="Message">
+        select *
+        from Message
+        where msgID = #{msgID};
+    </select>
 
     <select id="getInvitationMsg" parameterType="String" resultMap="TeamMsgMap">
         select Message.msgID,Message.userID, Message.teamID, DocUser.userName, DocUser.imagePath, Team.teamName, Message.msgContent, Message.createTime
@@ -35,6 +50,18 @@
         from Message, Team, DocUser
         where Message.targetUserID = #{userID} and Message.teamID = Team.teamID and Message.userID = DocUser.userID and Message.msgType = 1;
     </select>
+
+    <select id="getSystemMsg" parameterType="String" resultMap="SystemMsgMap">
+        select msgID, msgType, createTime, isRead
+        from Message
+        where targetUserID = #{userID} and (msgType = 3 or msgType = 4 or msgType = 5 or msgType = 6 or msgType = 7 or msgType = 8 or msgType = 11)
+    </select>
+
+    <update id="setMsgReadState" parameterType="String">
+        update Message
+        set isRead = 1
+        where msgID = #{msgID};
+    </update>
 
     <delete id="deleteMessage" parameterType="String">
         delete

@@ -1,6 +1,9 @@
 package com.diamond.service;
 
+import com.diamond.dto.SystemMessage;
 import com.diamond.dto.TeamMessage;
+import com.diamond.mapper.DocMapper;
+import com.diamond.mapper.DocUserMapper;
 import com.diamond.mapper.MessageMapper;
 import com.diamond.mapper.TeamMapper;
 import com.diamond.pojo.Message;
@@ -19,6 +22,10 @@ public class MessageService {
     private MessageMapper messageMapper;
     @Autowired
     private TeamMapper teamMapper;
+    @Autowired
+    private DocUserMapper docUserMapper;
+    @Autowired
+    private DocMapper docMapper;
 
     public void applyTeam(String userID, String targetTeamID, String content) throws Exception
     {
@@ -142,6 +149,30 @@ public class MessageService {
             {
                 teamMessage.setCreateTime(FormatHandler.AlterTimeFormat(teamMessage.getCreateTime()));
             }
+        }
+        return list;
+    }
+
+    public List<SystemMessage> getSystemMsg(String userID) throws Exception
+    {
+        List<SystemMessage> list = new ArrayList<>();
+        list = messageMapper.getSystemMsg(userID);
+        for (SystemMessage systemMessage : list)
+        {
+            systemMessage.setCreateTime(FormatHandler.AlterTimeFormat(systemMessage.getCreateTime()));
+            if (systemMessage.getMsgType() == 8)
+            {
+                systemMessage.setName(teamMapper.getTeamByTeamID(messageMapper.getMsgByMsgID(systemMessage.getMsgID()).getTeamID()).getTeamName());
+            }
+            else if (systemMessage.getMsgType() == 11)
+            {
+                systemMessage.setName(docMapper.getDocByDocID(messageMapper.getMsgByMsgID(systemMessage.getMsgID()).getTeamID()).getDocTitle());
+            }
+            else
+            {
+                systemMessage.setName(docUserMapper.getUserByID(messageMapper.getMsgByMsgID(systemMessage.getMsgID()).getUserID()).getUserName());
+            }
+            messageMapper.setMsgReadState(systemMessage.getMsgID());
         }
         return list;
     }
