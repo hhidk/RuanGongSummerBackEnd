@@ -14,7 +14,7 @@
     <select id="getFavoriteDocByUserID" parameterType="String" resultType="DocPreview">
         select Doc.docID, docTitle
         from Doc,Favorite
-        where userID = #{userID} and Doc.docID = Favorite.docID
+        where userID = #{userID} and Doc.docID = Favorite.docID and isDeleted = 0
         order by Favorite.createtime desc
     </select>
 
