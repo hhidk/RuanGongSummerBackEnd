@@ -1,5 +1,6 @@
 package com.diamond.service;
 
+import com.diamond.mapper.DocMapper;
 import com.diamond.mapper.HistoryMapper;
 import com.diamond.pojo.History;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ public class HistoryService {
 
     @Autowired
     private HistoryMapper historyMapper;
+    @Autowired
+    private DocMapper docMapper;
 
     public void editDoc(String userID, String docID) throws Exception{
         History history = new History();
@@ -41,6 +44,8 @@ public class HistoryService {
     }
 
     public void deleteDoc(String userID, String docID) throws Exception{
+        if(docMapper.getDocDeleteState(docID) == 1)
+            return;
         History history = new History();
         history.setDocID(docID);
         history.setIteration(historyMapper.getLastHistory(docID)+1);
