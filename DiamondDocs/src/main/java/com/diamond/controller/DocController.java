@@ -53,8 +53,8 @@ public class DocController {
     @RequestMapping("/deleteDoc")
     public int deleteDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
         try {
-            docService.deleteDoc(docID);
             historyService.deleteDoc(userID,docID);
+            docService.deleteDoc(docID);
             return 0;
         }
         catch (Exception e){
