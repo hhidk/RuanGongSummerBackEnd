@@ -44,7 +44,7 @@
     <select id="getTeamByUserID" parameterType="String" resultType="Team">
         select Team.teamID, teamName, creatorID
         from Team, Member
-        where Member.userID = #{userID}) and Team.teamID = Member.teamID
+        where Member.userID = #{userID} and Team.teamID = Member.teamID
         order by lastVisitTime desc
     </select>
 
