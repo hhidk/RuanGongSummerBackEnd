@@ -24,11 +24,6 @@ public class DocService {
     @Autowired
     private FavoriteMapper favoriteMapper;
 
-    public DocPlus getDoc(String docID) throws Exception{
-        Doc doc = docMapper.getDocByDocID(docID);
-        return new DocPlus(doc);
-    }
-
     public String addDoc(String userID, String teamID) throws Exception{
         Doc doc = new Doc();
         String docID = DiyUUID.generateDocID();
@@ -48,19 +43,6 @@ public class DocService {
 
     public void editDocTitle(String docID, String docTitle) throws Exception{
         docMapper.updateDocTitle(docID,docTitle);
-    }
-
-    public void editDoc(String docID, String docTitle,
-                        String docContent, int docLimit) throws Exception{
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("docID", docID);
-        map.put("docTitle", docTitle);
-        map.put("docContent", docContent);
-        map.put("docLimit", docLimit);
-
-        docMapper.updateDoc(map);
-
     }
 
     public void deleteDoc(String docID) throws Exception{
