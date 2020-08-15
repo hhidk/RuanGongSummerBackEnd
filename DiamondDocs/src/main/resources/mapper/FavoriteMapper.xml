@@ -18,6 +18,12 @@
         order by Favorite.createtime desc
     </select>
 
+    <select id="checkExistFavorite" parameterType="String" resultType="Favorite">
+        select *
+        from Favorite
+        where userID = #{userID} and docID = #{docID}
+    </select>
+
     <delete id="deleteFavorite" parameterType="Map">
         delete
         from Favorite

@@ -19,6 +19,8 @@ public interface FavoriteMapper
 
     List<DocPreview> getFavoriteDocByUserID(@Param("userID") String userID);
 
+    Favorite checkExistFavorite(@Param("userID") String userID, @Param("docID") String docID);
+
     //key:docID, userID
     int deleteFavorite(Map<String, Object> map);
 }

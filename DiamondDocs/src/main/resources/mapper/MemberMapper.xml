@@ -30,7 +30,7 @@
     </update>
 
     <select id="getDocUserIdentity" parameterType="String" resultType="int">
-        select userIdentity
+        select distinct userIdentity
         from Member
         where userID = #{userID} and teamID = #{teamID}
     </select>
@@ -69,7 +69,7 @@
     <select id="getDocByTeamID" parameterType="String" resultType="Doc">
         select *
         from Doc
-        where teamID = #{teamID};
+        where teamID = #{teamID} and isDeleted = 0;
     </select>
 
     <delete id="deleteMember" parameterType="Map">

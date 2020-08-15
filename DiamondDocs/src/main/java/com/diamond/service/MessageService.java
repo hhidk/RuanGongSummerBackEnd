@@ -112,6 +112,7 @@ public class MessageService {
 
     public void refuseTeam(String userID, String targetUserID, String teamID, String msgID) throws Exception
     {
+        System.out.println(msgID);
         Message message = new Message();
         message.setMsgID(DiyUUID.generateMsgID());
         message.setMsgContent("");

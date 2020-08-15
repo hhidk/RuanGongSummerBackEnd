@@ -5,6 +5,7 @@ import com.diamond.mapper.BrowsesMapper;
 import com.diamond.mapper.DocMapper;
 import com.diamond.mapper.FavoriteMapper;
 import com.diamond.pojo.Doc;
+import com.diamond.pojo.Favorite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,14 @@ public class UserSpaceService {
     public List<DocPreview> getDeletedDocs(String userID) throws Exception{
         List<Doc> list = docMapper.getDeletedDocByUserID(userID);
         return DocPreview.getPreviewList(list);
+    }
+
+    public int isFavorite(String userID, String docID) throws Exception{
+        Favorite favorite = favoriteMapper.checkExistFavorite(userID, docID);
+        if(favorite != null)
+            return 1;
+        else
+            return 0;
     }
 
 }
