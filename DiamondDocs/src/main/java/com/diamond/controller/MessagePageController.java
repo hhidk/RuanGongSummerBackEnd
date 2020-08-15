@@ -56,6 +56,18 @@ public class MessagePageController {
         }
     }
 
+    @RequestMapping("/getMsgNum")
+    public int getMsgNum(@RequestParam("userID") String userID)
+    {
+        try {
+            return messageService.getMsgNum(userID);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     @RequestMapping("/deleteMsg")
     public int deleteMsg(@RequestParam("msgID") String msgID)
     {

@@ -238,6 +238,11 @@ public class MessageService {
         return list;
     }
 
+    public int getMsgNum(String userID)
+    {
+        return messageMapper.getMsgNum(userID);
+    }
+
     public void deleteMsg(String msgID) throws Exception
     {
         messageMapper.deleteMessage(msgID);

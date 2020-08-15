@@ -27,6 +27,8 @@ public interface MessageMapper {
 
     List<SystemMessage> getSystemMsg(@Param("userID") String userID);
 
+    int getMsgNum(@Param("userID") String userID);
+
     //key:msgID, type
     int setMsgReadState(Map<String, Object> map);
 

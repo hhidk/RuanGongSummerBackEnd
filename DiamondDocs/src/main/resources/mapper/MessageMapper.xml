@@ -81,6 +81,12 @@
         order by createTime desc;
     </select>
 
+    <select id="getMsgNum" parameterType="String" resultType="int">
+        select count(msgID)
+        from Message
+        where targetUserID = #{userID} and isRead = 0;
+    </select>
+
     <update id="setMsgReadState" parameterType="Map">
         update Message
         set isRead = #{type}
