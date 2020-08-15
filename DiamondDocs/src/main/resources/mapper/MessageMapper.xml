@@ -16,6 +16,7 @@
         <result column="teamName" property="teamName"/>
         <result column="msgContent" property="content"/>
         <result column="createTime" property="createTime"/>
+        <result column="isRead" property="isRead"/>
     </resultMap>
 
     <resultMap id="CommentMsgMap" type="CommentMessage">
@@ -53,14 +54,14 @@
     </select>
 
     <select id="getInvitationMsg" parameterType="String" resultMap="TeamMsgMap">
-        select Message.msgID,Message.userID, Message.teamID, DocUser.userName, DocUser.imagePath, Team.teamName, Message.msgContent, Message.createTime
+        select Message.msgID,Message.userID, Message.teamID, DocUser.userName, DocUser.imagePath, Team.teamName, Message.msgContent, Message.createTime, isRead
         from Message, Team, DocUser
         where Message.targetUserID = #{userID} and Message.teamID = Team.teamID and Message.userID = DocUser.userID and Message.msgType = 0
         order by createTime desc;
     </select>
 
     <select id="getApplicationMsg" parameterType="String" resultMap="TeamMsgMap">
-        select Message.msgID,Message.userID, Message.teamID, DocUser.userName, DocUser.imagePath, Team.teamName, Message.msgContent, Message.createTime
+        select Message.msgID,Message.userID, Message.teamID, DocUser.userName, DocUser.imagePath, Team.teamName, Message.msgContent, Message.createTime, isRead
         from Message, Team, DocUser
         where Message.targetUserID = #{userID} and Message.teamID = Team.teamID and Message.userID = DocUser.userID and Message.msgType = 1
         order by createTime desc;
