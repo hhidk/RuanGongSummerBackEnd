@@ -12,7 +12,7 @@
     </insert>
 
     <select id="getFavoriteDocByUserID" parameterType="String" resultType="DocPreview">
-        select Doc.docID, docTitle
+        select Doc.docID, docTitle, creatorID, lastEditTime
         from Doc,Favorite
         where userID = #{userID} and Doc.docID = Favorite.docID and isDeleted = 0
         order by Favorite.createtime desc

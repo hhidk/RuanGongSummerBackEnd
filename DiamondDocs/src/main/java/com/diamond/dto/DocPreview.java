@@ -19,11 +19,13 @@ public class DocPreview {
     String docID;
     String docTitle;
     String creatorID;
+    String lastEditTime;
 
     public DocPreview(Doc doc){
         this.docID = doc.getDocID();
         this.docTitle = FormatHandler.getPreviewTitle(doc.getDocTitle());
         this.creatorID = doc.getCreatorID();
+        this.lastEditTime = doc.getLastEditTime();
     }
 
     public static List<DocPreview> getPreviewList(List<Doc> docList){

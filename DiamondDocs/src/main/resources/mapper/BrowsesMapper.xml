@@ -11,7 +11,7 @@
     </insert>
 
     <select id="getBrowsesDocByUserID" parameterType="String" resultType="DocPreview">
-        select Doc.docID, docTitle
+        select Doc.docID, docTitle, creatorID, lastEditTime
         from Doc,Browses
         where userID = #{userID} and Doc.docID = Browses.docID and isDeleted = 0
         order by Browses.createtime desc
