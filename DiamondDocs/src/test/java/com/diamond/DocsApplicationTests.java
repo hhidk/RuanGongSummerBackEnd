@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 class DocsApplicationTests {
 
     @Test
-    void contextLoads() {
-    }
+    void contextLoads() { }
 
 }

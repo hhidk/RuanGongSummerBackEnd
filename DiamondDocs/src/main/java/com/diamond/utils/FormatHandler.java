@@ -103,7 +103,7 @@ public class FormatHandler {
                 break;
             }
         }
-        if(!string.equals(title))
+        if(!string.equals(title.toString()))
             title.append("…");
         return title.toString();
     }
