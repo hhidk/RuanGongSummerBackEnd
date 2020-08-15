@@ -20,7 +20,7 @@ public class UserSpaceController {
     @RequestMapping("/getMyDocs")
     public List<DocPreview> getMyDocs(String userID){
         try {
-            return userSpaceService.getMyDocs(userID);
+            return userSpaceService.getMyDocs(userID, 10);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -31,7 +31,7 @@ public class UserSpaceController {
     @RequestMapping("/getRecentDocs")
     public List<DocPreview> getRecentDocs(String userID){
         try {
-            return userSpaceService.getRecentDocs(userID);
+            return userSpaceService.getRecentDocs(userID, 10);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -42,7 +42,7 @@ public class UserSpaceController {
     @RequestMapping("/getFavoriteDocs")
     public List<DocPreview> getFavoriteDocs(String userID){
         try {
-            return userSpaceService.getFavoriteDocs(userID);
+            return userSpaceService.getFavoriteDocs(userID, 10);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -53,7 +53,7 @@ public class UserSpaceController {
     @RequestMapping("/getDeletedDocs")
     public List<DocPreview> getDeletedDocs(String userID){
         try{
-            return userSpaceService.getDeletedDocs(userID);
+            return userSpaceService.getDeletedDocs(userID, 10);
         }
         catch (Exception e){
             e.printStackTrace();

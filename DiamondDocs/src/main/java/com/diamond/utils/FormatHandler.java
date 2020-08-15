@@ -78,33 +78,4 @@ public class FormatHandler {
         return list;
     }
 
-    /*
-    * 笨方法转化
-    * 转化要求：10字节内容+两字节省略号
-    */
-    public static String getPreviewTitle(String string) {
-        int length = 0;
-        StringBuilder title = new StringBuilder();
-        for(int i = 0 ; i < string.length() ; i++){
-            char c = string.charAt(i);
-            if(c>=19968 && c<=40869 && length <= 8) {
-                length = length + 2;
-            }
-            else if(!(c>=19968 && c<=40869) && length <= 9){
-                length ++;
-            }
-            else
-                break;
-            if(length < 10){
-                title.append(c);
-            }
-            else if(length == 10){
-                title.append(c);
-                break;
-            }
-        }
-        if(!string.equals(title.toString()))
-            title.append("…");
-        return title.toString();
-    }
 }

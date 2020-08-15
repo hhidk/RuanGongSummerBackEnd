@@ -21,22 +21,24 @@ public class UserSpaceService {
     @Autowired
     private BrowsesMapper browsesMapper;
 
-    public List<DocPreview> getMyDocs(String userID) throws Exception{
+    public List<DocPreview> getMyDocs(String userID, int type) throws Exception{
         List<Doc> list = docMapper.getDocByUserID(userID);
-        return DocPreview.getPreviewList(list);
+        return DocPreview.getPreviewList(list, type);
     }
 
-    public List<DocPreview> getRecentDocs(String userID) throws Exception{
-        return browsesMapper.getBrowsesDocByUserID(userID);
+    public List<DocPreview> getRecentDocs(String userID, int type) throws Exception{
+        List<Doc> list = browsesMapper.getBrowsesDocByUserID(userID);
+        return DocPreview.getPreviewList(list, type);
     }
 
-    public List<DocPreview> getFavoriteDocs(String userID) throws Exception{
-        return favoriteMapper.getFavoriteDocByUserID(userID);
+    public List<DocPreview> getFavoriteDocs(String userID, int type) throws Exception{
+        List<Doc> list = favoriteMapper.getFavoriteDocByUserID(userID);
+        return DocPreview.getPreviewList(list, type);
     }
 
-    public List<DocPreview> getDeletedDocs(String userID) throws Exception{
+    public List<DocPreview> getDeletedDocs(String userID, int type) throws Exception{
         List<Doc> list = docMapper.getDeletedDocByUserID(userID);
-        return DocPreview.getPreviewList(list);
+        return DocPreview.getPreviewList(list, type);
     }
 
     public int isFavorite(String userID, String docID) throws Exception{

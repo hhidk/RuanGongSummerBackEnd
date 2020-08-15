@@ -10,7 +10,7 @@
         values(#{userID}, #{docID}, getdate());
     </insert>
 
-    <select id="getBrowsesDocByUserID" parameterType="String" resultType="DocPreview">
+    <select id="getBrowsesDocByUserID" parameterType="String" resultType="Doc">
         select distinct Doc.docID, docTitle, creatorID, lastEditTime, Browses.createTime
         from Doc,Browses
         where userID = #{userID} and Doc.docID = Browses.docID and isDeleted = 0

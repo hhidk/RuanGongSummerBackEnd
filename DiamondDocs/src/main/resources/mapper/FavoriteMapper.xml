@@ -11,7 +11,7 @@
         values (#{docID}, #{userID}, GETDATE());
     </insert>
 
-    <select id="getFavoriteDocByUserID" parameterType="String" resultType="DocPreview">
+    <select id="getFavoriteDocByUserID" parameterType="String" resultType="Doc">
         select Doc.docID, docTitle, creatorID, lastEditTime
         from Doc,Favorite
         where userID = #{userID} and Doc.docID = Favorite.docID and isDeleted = 0

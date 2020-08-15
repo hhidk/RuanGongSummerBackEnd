@@ -23,15 +23,47 @@ public class DocPreview {
 
     public DocPreview(Doc doc){
         this.docID = doc.getDocID();
-        this.docTitle = FormatHandler.getPreviewTitle(doc.getDocTitle());
+        this.docTitle = doc.getDocTitle();
         this.creatorID = doc.getCreatorID();
         this.lastEditTime = doc.getLastEditTime();
     }
 
-    public static List<DocPreview> getPreviewList(List<Doc> docList){
+    /*
+     * 笨方法转化
+     * 转化要求：10字节内容+两字节省略号
+     */
+    public void setTitleToPreview(int type) {
+        String string = this.docTitle;
+        int length = 0;
+        StringBuilder title = new StringBuilder();
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            if (c >= 19968 && c <= 40869 && length <= type-2) {
+                length = length + 2;
+            } else if (!(c >= 19968 && c <= 40869) && length <= type-1) {
+                length++;
+            } else
+                break;
+            if (length < type) {
+                title.append(c);
+            } else if (length == type) {
+                title.append(c);
+                break;
+            }
+        }
+        if (!string.equals(title.toString()))
+            title.append("…");
+
+        this.docTitle = title.toString();
+    }
+
+    public static List<DocPreview> getPreviewList(List<Doc> docList, int type){
         List<DocPreview> list = new ArrayList<>();
-        for (Doc doc : docList)
-            list.add(new DocPreview(doc));
+        for (Doc doc : docList) {
+            DocPreview docPreview = new DocPreview(doc);
+            docPreview.setTitleToPreview(type);
+            list.add(docPreview);
+        }
         return list;
     }
 }
