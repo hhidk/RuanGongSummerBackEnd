@@ -1,6 +1,7 @@
 package com.diamond.dto;
 
 import com.diamond.pojo.Doc;
+import com.diamond.utils.FormatHandler;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,7 +22,7 @@ public class DocPreview {
 
     public DocPreview(Doc doc){
         this.docID = doc.getDocID();
-        this.docTitle = doc.getDocTitle();
+        this.docTitle = FormatHandler.getPreviewTitle(doc.getDocTitle());
         this.creatorID = doc.getCreatorID();
     }
 
