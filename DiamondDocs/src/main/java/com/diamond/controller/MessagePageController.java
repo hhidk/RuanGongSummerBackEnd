@@ -68,6 +68,54 @@ public class MessagePageController {
         }
     }
 
+    @RequestMapping("/getInvitationMsgNum")
+    public int getInvitationMsgNum(@RequestParam("userID") String userID)
+    {
+        try {
+            return messageService.getInvitationMsgNum(userID);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @RequestMapping("/getApplicationMsgNum")
+    public int getApplicationMsgNum(@RequestParam("userID") String userID)
+    {
+        try {
+            return messageService.getApplicationMsgNum(userID);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @RequestMapping("/getReplyMsgNum")
+    public int getReplyMsgNum(@RequestParam("userID") String userID)
+    {
+        try {
+            return messageService.getReplyMsgNum(userID);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @RequestMapping("/getSystemMsgNum")
+    public int getSystemMsgNum(@RequestParam("userID") String userID)
+    {
+        try {
+            return messageService.getSystemMsgNum(userID);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     @RequestMapping("/deleteMsg")
     public int deleteMsg(@RequestParam("msgID") String msgID)
     {

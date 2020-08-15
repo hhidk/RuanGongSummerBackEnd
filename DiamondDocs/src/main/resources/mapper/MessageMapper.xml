@@ -87,6 +87,30 @@
         where targetUserID = #{userID} and isRead = 0;
     </select>
 
+    <select id="getInvitationMsgNum" parameterType="String" resultType="int">
+        select count(msgID)
+        from Message
+        where targetUserID = #{userID} and isRead = 0 and msgType = 0;
+    </select>
+
+    <select id="getApplicationMsgNum" parameterType="String" resultType="int">
+        select count(msgID)
+        from Message
+        where targetUserID = #{userID} and isRead = 0 and msgType = 1;
+    </select>
+
+    <select id="getReplyMsgNum" parameterType="String" resultType="int">
+        select count(msgID)
+        from Message
+        where targetUserID = #{userID} and isRead = 0 and (msgType = 9 or msgType = 10);
+    </select>
+
+    <select id="getSystemMsgNum" parameterType="String" resultType="int">
+        select count(msgID)
+        from Message
+        where targetUserID = #{userID} and isRead = 0 and (msgType = 3 or msgType = 4 or msgType = 5 or msgType = 6 or msgType = 7 or msgType = 8 or msgType = 11);
+    </select>
+
     <update id="setMsgReadState" parameterType="Map">
         update Message
         set isRead = #{type}

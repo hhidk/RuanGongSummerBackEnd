@@ -243,6 +243,26 @@ public class MessageService {
         return messageMapper.getMsgNum(userID);
     }
 
+    public int getInvitationMsgNum(String userID)
+    {
+        return messageMapper.getInvitationMsgNum(userID);
+    }
+
+    public int getApplicationMsgNum(String userID)
+    {
+        return messageMapper.getApplicationMsgNum(userID);
+    }
+
+    public int getReplyMsgNum(String userID)
+    {
+        return messageMapper.getReplyMsgNum(userID);
+    }
+
+    public int getSystemMsgNum(String userID)
+    {
+        return messageMapper.getSystemMsgNum(userID);
+    }
+
     public void deleteMsg(String msgID) throws Exception
     {
         messageMapper.deleteMessage(msgID);
