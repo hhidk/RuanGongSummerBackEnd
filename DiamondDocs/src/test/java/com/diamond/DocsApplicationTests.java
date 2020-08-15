@@ -10,7 +10,6 @@ class DocsApplicationTests {
 
     @Test
     void contextLoads() {
-
     }
 
 }

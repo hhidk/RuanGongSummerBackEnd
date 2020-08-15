@@ -87,10 +87,10 @@ public class FormatHandler {
         StringBuilder title = new StringBuilder();
         for(int i = 0 ; i < string.length() ; i++){
             char c = string.charAt(i);
-            if(c>19968 && c<40869 && length <= 8) {
+            if(c>=19968 && c<=40869 && length <= 8) {
                 length = length + 2;
             }
-            else if(length <= 9){
+            else if(!(c>=19968 && c<=40869) && length <= 9){
                 length ++;
             }
             else
@@ -103,9 +103,7 @@ public class FormatHandler {
                 break;
             }
         }
-        if(title.length() == 9)
-            title.append("……");
-        else
+        if(!string.equals(title))
             title.append("…");
         return title.toString();
     }
