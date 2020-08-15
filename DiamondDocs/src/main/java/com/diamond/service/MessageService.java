@@ -127,7 +127,6 @@ public class MessageService {
         map.put("msgID", msgID);
         map.put("type", 3);
         messageMapper.setMsgReadState(map);
-        System.out.println("设置3");
     }
 
     public void quitTeam(String userID, String teamID) throws Exception
@@ -170,7 +169,6 @@ public class MessageService {
         for (TeamMessage teamMessage : list)
         {
             teamMessage.setCreateTime(FormatHandler.AlterTimeFormat(teamMessage.getCreateTime()));
-            System.out.println(teamMessage);
             if(teamMessage.getIsRead() == 0)
             {
                 Map<String, Object> map = new HashMap<>();
@@ -204,7 +202,6 @@ public class MessageService {
                 map.put("msgID", commentMessage.getMsgID());
                 map.put("type", 1);
                 messageMapper.setMsgReadState(map);
-                System.out.println("设置1");
             }
         }
         return list;
