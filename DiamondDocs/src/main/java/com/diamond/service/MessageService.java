@@ -168,10 +168,13 @@ public class MessageService {
         for (TeamMessage teamMessage : list)
         {
             teamMessage.setCreateTime(FormatHandler.AlterTimeFormat(teamMessage.getCreateTime()));
-            Map<String, Object> map = new HashMap<>();
-            map.put("msgID", teamMessage.getMsgID());
-            map.put("type", 1);
-            messageMapper.setMsgReadState(map);
+            if(teamMessage.getIsRead() == 0)
+            {
+                Map<String, Object> map = new HashMap<>();
+                map.put("msgID", teamMessage.getMsgID());
+                map.put("type", 1);
+                messageMapper.setMsgReadState(map);
+            }
         }
         return list;
     }
@@ -192,10 +195,13 @@ public class MessageService {
                 commentMessage.setContent(commentMapper.getCommentByCommentID(commentMessage.getID()).getCommentContent());
             }
 
-            Map<String, Object> map = new HashMap<>();
-            map.put("msgID", commentMessage.getMsgID());
-            map.put("type", 1);
-            messageMapper.setMsgReadState(map);
+            if(commentMessage.getIsRead() == 0)
+            {
+                Map<String, Object> map = new HashMap<>();
+                map.put("msgID", commentMessage.getMsgID());
+                map.put("type", 1);
+                messageMapper.setMsgReadState(map);
+            }
         }
         return list;
     }
@@ -220,10 +226,13 @@ public class MessageService {
                 systemMessage.setName(docUserMapper.getUserByID(messageMapper.getMsgByMsgID(systemMessage.getMsgID()).getUserID()).getUserName());
             }
 
-            Map<String, Object> map = new HashMap<>();
-            map.put("msgID", systemMessage.getMsgID());
-            map.put("type", 1);
-            messageMapper.setMsgReadState(map);
+            if(systemMessage.getIsRead() == 0)
+            {
+                Map<String, Object> map = new HashMap<>();
+                map.put("msgID", systemMessage.getMsgID());
+                map.put("type", 1);
+                messageMapper.setMsgReadState(map);
+            }
         }
         return list;
     }
