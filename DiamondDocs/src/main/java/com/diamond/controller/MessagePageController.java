@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*",maxAge = 3600)
@@ -56,63 +58,21 @@ public class MessagePageController {
         }
     }
 
-    @RequestMapping("/getMsgNum")
-    public int getMsgNum(@RequestParam("userID") String userID)
+    @RequestMapping("/getAllMsgNum")
+    public Map<String, Integer> getAllMsgNum(@RequestParam("userID") String userID)
     {
         try {
-            return messageService.getMsgNum(userID);
+            Map<String, Integer> map = new HashMap<>();
+            map.put("all", messageService.getMsgNum(userID));
+            map.put("invitation", messageService.getInvitationMsgNum(userID));
+            map.put("application", messageService.getApplicationMsgNum(userID));
+            map.put("reply", messageService.getReplyMsgNum(userID));
+            map.put("system", messageService.getSystemMsgNum(userID));
+            return map;
         }
         catch (Exception e){
             e.printStackTrace();
-            return -1;
-        }
-    }
-
-    @RequestMapping("/getInvitationMsgNum")
-    public int getInvitationMsgNum(@RequestParam("userID") String userID)
-    {
-        try {
-            return messageService.getInvitationMsgNum(userID);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
-    @RequestMapping("/getApplicationMsgNum")
-    public int getApplicationMsgNum(@RequestParam("userID") String userID)
-    {
-        try {
-            return messageService.getApplicationMsgNum(userID);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
-    @RequestMapping("/getReplyMsgNum")
-    public int getReplyMsgNum(@RequestParam("userID") String userID)
-    {
-        try {
-            return messageService.getReplyMsgNum(userID);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
-    @RequestMapping("/getSystemMsgNum")
-    public int getSystemMsgNum(@RequestParam("userID") String userID)
-    {
-        try {
-            return messageService.getSystemMsgNum(userID);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return -1;
+            return null;
         }
     }
 
