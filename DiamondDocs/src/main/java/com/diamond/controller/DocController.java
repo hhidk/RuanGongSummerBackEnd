@@ -5,6 +5,7 @@ import com.diamond.dto.DocPreview;
 import com.diamond.service.BrowsesService;
 import com.diamond.service.DocService;
 import com.diamond.service.HistoryService;
+import com.diamond.utils.FormatHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.UsesSunHttpServer;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -89,10 +90,11 @@ public class DocController {
     }
 
     @RequestMapping("/docBatchDelete")
-    public int batchdDeleteDoc(@RequestParam("userID") String userID, @RequestParam("docIDs") List<String> docIDs){
+    public int batchDeleteDoc(@RequestParam("userID") String userID, @RequestParam("docIDs") String docIDs){
         try {
-            docService.batchDeleteDoc(docIDs);
-            historyService.batchDeleteDoc(userID,docIDs);
+            List<String> list = FormatHandler.getListString(docIDs);
+            docService.batchDeleteDoc(list);
+            historyService.batchDeleteDoc(userID,list);
             return 0;
         }
         catch (Exception e){
@@ -102,9 +104,10 @@ public class DocController {
     }
 
     @RequestMapping("/docBatchFavorite")
-    public int batchCollectDoc(@RequestParam("userID") String userID, @RequestParam("docIDs") List<String> docIDs){
+    public int batchCollectDoc(@RequestParam("userID") String userID, @RequestParam("docIDs") String docIDs){
         try {
-            docService.batchCollectDoc(userID, docIDs);
+            List<String> list = FormatHandler.getListString(docIDs);
+            docService.batchCollectDoc(userID, list);
             return 0;
         }
         catch (Exception e){

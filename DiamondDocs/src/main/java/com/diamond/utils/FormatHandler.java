@@ -1,7 +1,9 @@
 package com.diamond.utils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class FormatHandler {
     public static String AlterTimeFormat(String sqltime){
@@ -60,5 +62,15 @@ public class FormatHandler {
             e.printStackTrace();
             return "null";
         }
+    }
+
+    public static List<String> getListString(String strs) {
+        List<String> list = new ArrayList<>();
+        String[] tuples = strs.split("&");
+        for(String tuple : tuples){
+            String str = tuple.split("=")[1];
+            list.add(str);
+        }
+        return list;
     }
 }
