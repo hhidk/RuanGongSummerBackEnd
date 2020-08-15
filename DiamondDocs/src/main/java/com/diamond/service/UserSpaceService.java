@@ -9,6 +9,8 @@ import com.diamond.pojo.Favorite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @Service
@@ -28,6 +30,8 @@ public class UserSpaceService {
 
     public List<DocPreview> getRecentDocs(String userID, int type) throws Exception{
         List<Doc> list = browsesMapper.getBrowsesDocByUserID(userID);
+        LinkedHashSet<Doc> hashSet = new LinkedHashSet<>(list);
+        list = new ArrayList<>(hashSet);
         return DocPreview.getPreviewList(list, type);
     }
 
