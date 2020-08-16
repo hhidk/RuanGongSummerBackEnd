@@ -42,12 +42,19 @@ public class UserInfoService {
         if(Validation.checkEmailFormat(name) && password.equals(docUserMapper.getDocUserByEmailAddress(name).getUserPassword()))
             user = docUserMapper.getDocUserByEmailAddress(name);
         if(user != null)
-            return user;
+            if (user.getUserPassword().equals(password))
+                return user;
 
         List<DocUser> userList = docUserMapper.getDocUserByUserName(name);
         for(DocUser candidate : userList)
             if(password.equals(candidate.getUserPassword()))
                 return candidate;
+
+        user = docUserMapper.getUserByID(name);
+        if(user != null)
+            if(user.getUserPassword().equals(password))
+                return user;
+
         return null;
     }
 

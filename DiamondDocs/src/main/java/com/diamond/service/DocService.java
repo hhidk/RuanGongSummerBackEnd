@@ -91,6 +91,12 @@ public class DocService {
         }
     }
 
+    public void batchCancelCollectDoc(String userID, List<String> docIDs) throws Exception{
+        for(String docID : docIDs) {
+            cancelCollectDoc(userID, docID);
+        }
+    }
+
     /*public void batchCollectDoc(String userID, List<String> docIDs) throws Exception{
         for(String docID : docIDs) {
             collectDoc(userID, docID);

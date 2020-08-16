@@ -5,6 +5,7 @@ import com.diamond.dto.DocUserPreview;
 import com.diamond.dto.HistoryPlus;
 import com.diamond.mapper.*;
 import com.diamond.pojo.Doc;
+import com.diamond.utils.FormatHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,10 @@ public class DocPageService {
     }
 
     public List<HistoryPlus> getDocHistory(String docID) throws Exception{
-        return historyMapper.getDocHistory(docID);
+        List<HistoryPlus> list = historyMapper.getDocHistory(docID);
+        for (HistoryPlus historyPlus : list)
+            historyPlus.setOperateTime(FormatHandler.AlterTimeFormat(historyPlus.getOperateTime()));
+        return list;
     }
 
     public List<DocUserPreview> getDocCollaborator(String docID) throws Exception{
