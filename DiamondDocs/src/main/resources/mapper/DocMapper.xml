@@ -12,9 +12,9 @@
     </insert>
 
     <select id="getDocByDocID" parameterType="String" resultType="Doc">
-        select Doc.docID, docTitle, docContent, createTime, lastEditTime, creatorID
+        select *
         from Doc
-        where docID = #{docID} and isDeleted = 0;
+        where docID = #{docID};
     </select>
 
     <select id="getDocByDocTitle" parameterType="String" resultType="Doc">

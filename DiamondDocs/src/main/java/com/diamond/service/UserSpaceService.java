@@ -61,12 +61,12 @@ public class UserSpaceService {
         return DocPreview.getPreviewList(list, bytes);
     }
 
-    /*public int isFavorite(String userID, String docID) throws Exception{
+    public int isFavorite(String userID, String docID) throws Exception{
         Favorite favorite = favoriteMapper.checkExistFavorite(userID, docID);
         if(favorite != null)
             return 1;
         else
             return 0;
-    }*/
+    }
 
 }
