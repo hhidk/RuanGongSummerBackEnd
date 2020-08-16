@@ -20,6 +20,7 @@ public class DocPreview {
     String docTitle;
     String creatorID;
     String lastEditTime;
+    int isFavorite;
 
     public DocPreview(Doc doc){
         this.docID = doc.getDocID();

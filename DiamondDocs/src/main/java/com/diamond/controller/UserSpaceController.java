@@ -61,7 +61,7 @@ public class UserSpaceController {
         }
     }
 
-    @RequestMapping("/favoriteOrNot")
+    /*@RequestMapping("/favoriteOrNot")
     public int isFavorite(String userID, String docID){
         try {
             return userSpaceService.isFavorite(userID, docID);
@@ -70,6 +70,6 @@ public class UserSpaceController {
             e.printStackTrace();
             return 2;
         }
-    }
+    }*/
 
 }

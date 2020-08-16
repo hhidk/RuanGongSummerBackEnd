@@ -25,14 +25,30 @@ public class UserSpaceService {
 
     public List<DocPreview> getMyDocs(String userID, int bytes) throws Exception{
         List<Doc> list = docMapper.getDocByUserID(userID);
-        return DocPreview.getPreviewList(list, bytes);
+        List<DocPreview> docPreviewList = DocPreview.getPreviewList(list, bytes);
+        for(DocPreview docPreview : docPreviewList){
+            Favorite favorite = favoriteMapper.checkExistFavorite(userID, docPreview.getDocID());
+            if(favorite != null)
+                docPreview.setIsFavorite(1);
+            else
+                docPreview.setIsFavorite(0);
+        }
+        return docPreviewList;
     }
 
     public List<DocPreview> getRecentDocs(String userID, int bytes) throws Exception{
         List<Doc> list = browsesMapper.getBrowsesDocByUserID(userID);
         LinkedHashSet<Doc> hashSet = new LinkedHashSet<>(list);
         list = new ArrayList<>(hashSet);
-        return DocPreview.getPreviewList(list, bytes);
+        List<DocPreview> docPreviewList = DocPreview.getPreviewList(list, bytes);
+        for(DocPreview docPreview : docPreviewList) {
+            Favorite favorite = favoriteMapper.checkExistFavorite(userID, docPreview.getDocID());
+            if (favorite != null)
+                docPreview.setIsFavorite(1);
+            else
+                docPreview.setIsFavorite(0);
+        }
+        return docPreviewList;
     }
 
     public List<DocPreview> getFavoriteDocs(String userID, int bytes) throws Exception{
@@ -45,12 +61,12 @@ public class UserSpaceService {
         return DocPreview.getPreviewList(list, bytes);
     }
 
-    public int isFavorite(String userID, String docID) throws Exception{
+    /*public int isFavorite(String userID, String docID) throws Exception{
         Favorite favorite = favoriteMapper.checkExistFavorite(userID, docID);
         if(favorite != null)
             return 1;
         else
             return 0;
-    }
+    }*/
 
 }
