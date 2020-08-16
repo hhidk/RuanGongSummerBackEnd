@@ -11,10 +11,10 @@
         values (#{docID}, #{docContent}, #{docTitle}, #{teamID}, #{creatorID}, GETDATE(), GETDATE(), #{editState}, #{docLimit}, #{isDeleted});
     </insert>
 
-    <select id="getDocByDocID" parameterType="String" resultType="DocPlus">
-        select Doc.docID, docTitle, docContent, createTime, lastEditTime, creatorID, userName creatorName, teamName
+    <select id="getDocByDocID" parameterType="String" resultType="Doc">
+        select Doc.docID, docTitle, docContent, createTime, lastEditTime, creatorID
         from Doc, DocUser, Team
-        where docID = #{docID} and Doc.creatorID = DocUser.creatorID and Doc.teamID = Team.teamID and isDeleted = 0;
+        where docID = #{docID} and isDeleted = 0;
     </select>
 
     <select id="getDocByDocTitle" parameterType="String" resultType="Doc">

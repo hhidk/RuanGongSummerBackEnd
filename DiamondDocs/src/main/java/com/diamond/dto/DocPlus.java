@@ -17,4 +17,13 @@ public class DocPlus {
     String creatorName;
     String teamName;
 
+    public DocPlus(Doc doc){
+        this.docID = doc.getDocID();
+        this.docTitle = doc.getDocTitle();
+        this.docContent = doc.getDocContent();
+        this.createTime = doc.getCreateTime();
+        this.lastEditTime = doc.getLastEditTime();
+        this. creatorID = doc.getCreatorID();
+    }
+
 }

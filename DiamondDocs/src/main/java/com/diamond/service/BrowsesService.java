@@ -1,5 +1,6 @@
 package com.diamond.service;
 
+import com.diamond.dto.DocPlus;
 import com.diamond.mapper.BrowsesMapper;
 import com.diamond.mapper.DocMapper;
 import com.diamond.mapper.MemberMapper;
@@ -26,8 +27,6 @@ public class BrowsesService {
         browsesMapper.addBrowses(browses);
 
         //标记该文档所在组（如果有）
-        Doc doc = docMapper.getDocByDocID(docID);
-        if(doc.getTeamID() != null)
-            memberMapper.updateLastVisitTime(userID, doc.getTeamID());
+        //功能暂时下线
     }
 }

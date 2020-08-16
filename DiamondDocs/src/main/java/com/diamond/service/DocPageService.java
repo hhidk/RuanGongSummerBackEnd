@@ -16,9 +16,20 @@ public class DocPageService {
 
     @Autowired
     private DocMapper docMapper;
+    @Autowired
+    private TeamMapper teamMapper;
+    @Autowired
+    private DocUserMapper docUserMapper;
 
     public DocPlus getDoc(String docID) throws Exception{
-        DocPlus docPlus = docMapper.getDocByDocID(docID);
+        Doc doc = docMapper.getDocByDocID(docID);
+        DocPlus docPlus = new DocPlus(doc);
+        String teamID = doc.getTeamID();
+        String creatorID = doc.getCreatorID();
+        if(teamID != null){
+            docPlus.setTeamName(teamMapper.getTeamByTeamID(teamID).getTeamName());
+        }
+        docPlus.setCreatorName(docUserMapper.getUserByID(creatorID).getUserName());
         return docPlus;
     }
 

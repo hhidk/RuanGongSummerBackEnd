@@ -17,7 +17,7 @@ public interface DocMapper
 
     int addDoc(Doc doc);
 
-    DocPlus getDocByDocID(@Param("docID") String docID);
+    Doc getDocByDocID(@Param("docID") String docID);
 
     List<Doc> getDocByDocTitle(@Param("docTitle") String docTitle);
 
