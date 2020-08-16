@@ -44,7 +44,7 @@ public class DocPageController {
     @RequestMapping("/getDocHistory")
     public List<HistoryPlus> getDocHistory(@RequestParam("docID") String docID){
         try {
-            return null;
+            return docPageService.getDocHistory(docID);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -55,7 +55,7 @@ public class DocPageController {
     @RequestMapping("/getDocCollaborator")
     public List<DocUserPreview> getDocCollaborator(@RequestParam("docID") String docID){
         try {
-            return null;
+            return docPageService.getDocCollaborator(docID);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -63,13 +63,55 @@ public class DocPageController {
         }
     }
 
-    @RequestMapping("/editDoc")
-    public int editDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID,
-                       @RequestParam("docTitle") String docTitle, @RequestParam("docContent") String docContent,
-                       @RequestParam("docLimit") int docLimit){
+    @RequestMapping("/tryEditDoc")
+    public int tryEditDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
         try {
-            docPageService.editDoc(docID,docTitle,docContent,docLimit);
-            historyService.editDoc(userID,docID);
+            return docPageService.tryEditDoc(userID, docID);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/completeEditDoc")
+    public int completeEditDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID, @RequestParam("editState") int editState){
+        try {
+            historyService.editDoc(userID, docID);
+            return docPageService.completeEditDoc(userID, docID, editState);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/setDocLimit")
+    public int setDocLimit(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
+        try {
+            return docPageService.setDocLimit(userID, docID);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/getDocLimit")
+    public int getDocLimit(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
+        try {
+            return docPageService.getDocLimit(userID, docID);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
+    @RequestMapping("/editDoc")
+    public int editDoc( @RequestParam("docID") String docID, @RequestParam("docContent") String docContent){
+        try {
+            docPageService.editDoc(docID, docContent);
 
             return 0;
         }

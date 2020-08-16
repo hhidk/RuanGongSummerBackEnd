@@ -58,7 +58,7 @@
 
     <update id="updateDoc" parameterType="Map">
         update Doc
-        set docTitle = #{docTitle}, docContent = #{docContent}, doclimit = #{docLimit}, lastEditTime = GETDATE()
+        set docContent = #{docContent}, lastEditTime = GETDATE()
         where docID = #{docID};
     </update>
 

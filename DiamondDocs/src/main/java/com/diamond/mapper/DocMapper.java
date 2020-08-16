@@ -33,7 +33,7 @@ public interface DocMapper
     int getDocDeleteState(@Param("docID") String docID);
 
     /*
-    key:docID, docTitle, docContent, docLimit
+    key:docID, docContent
      */
     int updateDoc(Map<String, Object> map);
 
