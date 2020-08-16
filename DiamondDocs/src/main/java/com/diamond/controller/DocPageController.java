@@ -77,8 +77,11 @@ public class DocPageController {
     @RequestMapping("/completeEditDoc")
     public int completeEditDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID, @RequestParam("editState") int editState){
         try {
-            historyService.editDoc(userID, docID);
-            return docPageService.completeEditDoc(userID, docID, editState);
+            if(editState == 0){
+                historyService.editDoc(userID, docID);
+                return docPageService.completeEditDoc(userID, docID);
+            }
+            return 0;
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -53,7 +53,7 @@ public class DocPageService {
         return 0;
     }
 
-    public int completeEditDoc(String userID, String docID, int editState) throws Exception{
+    public int completeEditDoc(String userID, String docID) throws Exception{
         return 0;
     }
 
