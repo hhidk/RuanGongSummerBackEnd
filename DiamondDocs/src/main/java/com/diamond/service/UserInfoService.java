@@ -39,7 +39,7 @@ public class UserInfoService {
 
     public DocUser login(String name, String password) throws Exception {
         DocUser user = null;
-        if(Validation.checkEmailFormat(name) && password.equals(docUserMapper.getDocUserByEmailAddress(name).getUserPassword()))
+        if(Validation.checkEmailFormat(name))
             user = docUserMapper.getDocUserByEmailAddress(name);
         if(user != null)
             if (user.getUserPassword().equals(password))
