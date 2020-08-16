@@ -104,7 +104,7 @@ public class DocPageController {
         }
         catch (Exception e) {
             e.printStackTrace();
-            return 1;
+            return 3;
         }
     }
 
@@ -112,7 +112,6 @@ public class DocPageController {
     public int editDoc( @RequestParam("docID") String docID, @RequestParam("docContent") String docContent){
         try {
             docPageService.editDoc(docID, docContent);
-
             return 0;
         }
         catch (Exception e){
