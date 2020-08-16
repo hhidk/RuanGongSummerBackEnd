@@ -80,6 +80,12 @@ public class DocService {
         }
     }
 
+    public void batchRecoverDoc(List<String> docIDs) throws Exception{
+        for(String docID : docIDs) {
+            recoverDoc(docID);
+        }
+    }
+
     public void batchCollectDoc(String userID, List<String> docIDs) throws Exception{
         for(String docID : docIDs) {
             collectDoc(userID, docID);

@@ -65,4 +65,10 @@ public class HistoryService {
         }
     }
 
+    public void batchRecoverDoc(String userID, List<String> docIDs) throws Exception{
+        for(String docID : docIDs) {
+            recoverDoc(userID, docID);
+        }
+    }
+
 }

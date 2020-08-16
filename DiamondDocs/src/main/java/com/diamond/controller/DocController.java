@@ -103,6 +103,20 @@ public class DocController {
         }
     }
 
+    @RequestMapping("/docBatchRecover")
+    public int batchRecoverDoc(@RequestParam("userID") String userID, @RequestParam("docIDs") String docIDs){
+        try {
+            List<String> list = FormatHandler.getListString(docIDs);
+            docService.batchRecoverDoc(list);
+            historyService.batchRecoverDoc(userID,list);
+            return 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
     @RequestMapping("/docBatchFavorite")
     public int batchCollectDoc(@RequestParam("userID") String userID, @RequestParam("docIDs") String docIDs){
         try {
