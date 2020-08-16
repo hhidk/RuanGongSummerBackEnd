@@ -10,13 +10,11 @@ public class DocPlus {
     String docID;
     String docTitle;
     String docContent;
+    String createTime;
     String lastEditTime;
     String creatorID;
 
-    String name;
+    String creatorName;
+    String teamName;
 
-    public DocPlus(Doc doc){
-        this.docID = doc.getDocID();
-        this.docTitle = doc.getDocTitle();
-    }
 }
