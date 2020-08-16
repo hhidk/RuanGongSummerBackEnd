@@ -13,6 +13,7 @@ public class DocPlus {
     String createTime;
     String lastEditTime;
     String creatorID;
+    int docLimit;
 
     String creatorName;
     String teamName;
@@ -24,6 +25,7 @@ public class DocPlus {
         this.createTime = doc.getCreateTime();
         this.lastEditTime = doc.getLastEditTime();
         this.creatorID = doc.getCreatorID();
+        this.docLimit = doc.getDocLimit();
     }
 
 }
