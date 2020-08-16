@@ -5,6 +5,21 @@
 
 <mapper namespace="com.diamond.mapper.HistoryMapper">
 
+    <resultMap id="HistoryPlusMap" type="HistoryPlus">
+        <!-- column是数据库表的列名 , property是对应实体类的属性名 -->
+        <result column="userID" property="userID"/>
+        <result column="userName" property="userName"/>
+        <result column="operation" property="operation"/>
+        <result column="operateTime" property="operateTime"/>
+    </resultMap>
+
+    <resultMap id="DocUserPreviewMap" type="DocUserPreview">
+        <id column="userID" property="userID"/>
+        <result column="userName" property="userName"/>
+        <result column="imagePath" property="imagePath"/>
+        <result column="emailAddress" property="emailAddress"/>
+    </resultMap>
+
     <insert id="addHistory" parameterType="History">
         insert
         into History (docID, iteration, operation, userID, operateTime)
@@ -15,6 +30,18 @@
         select max(iteration)
         from History
         where docID = #{docID}
+    </select>
+
+    <select id="getDocCollaboratorJ" parameterType="String" resultMap="DocUserPreviewMap">
+        select DocUser.userID, userName, imagePath, emailAddress
+        from DocUser
+        where DocUser.userID in (select userID from History where History.docID = #{docID});
+    </select>
+
+    <select id="getDocHistory" parameterType="String" resultMap="HistoryPlus">
+        select DocUser.userID, userName, operation, operateTime
+        from History, DocUser
+        where docID = #{docID} and DocUser.userID = History.userID;
     </select>
 
 </mapper>
