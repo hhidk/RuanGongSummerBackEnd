@@ -29,9 +29,9 @@ public class TeamSpaceService {
         return memberMapper.getTeamMemberPreviewByTeamID(teamID);
     }
 
-    public List<DocPreview> getTeamDocs(String teamID, int type) throws Exception{
+    public List<DocPreview> getTeamDocs(String teamID, int bytes) throws Exception{
         List<Doc> docList = memberMapper.getDocByTeamID(teamID);
-        return DocPreview.getPreviewList(docList, type);
+        return DocPreview.getPreviewList(docList, bytes);
     }
 
     public int getUserIdentity(String userID, String teamID) throws Exception {

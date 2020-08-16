@@ -23,26 +23,26 @@ public class UserSpaceService {
     @Autowired
     private BrowsesMapper browsesMapper;
 
-    public List<DocPreview> getMyDocs(String userID, int type) throws Exception{
+    public List<DocPreview> getMyDocs(String userID, int bytes) throws Exception{
         List<Doc> list = docMapper.getDocByUserID(userID);
-        return DocPreview.getPreviewList(list, type);
+        return DocPreview.getPreviewList(list, bytes);
     }
 
-    public List<DocPreview> getRecentDocs(String userID, int type) throws Exception{
+    public List<DocPreview> getRecentDocs(String userID, int bytes) throws Exception{
         List<Doc> list = browsesMapper.getBrowsesDocByUserID(userID);
         LinkedHashSet<Doc> hashSet = new LinkedHashSet<>(list);
         list = new ArrayList<>(hashSet);
-        return DocPreview.getPreviewList(list, type);
+        return DocPreview.getPreviewList(list, bytes);
     }
 
-    public List<DocPreview> getFavoriteDocs(String userID, int type) throws Exception{
+    public List<DocPreview> getFavoriteDocs(String userID, int bytes) throws Exception{
         List<Doc> list = favoriteMapper.getFavoriteDocByUserID(userID);
-        return DocPreview.getPreviewList(list, type);
+        return DocPreview.getPreviewList(list, bytes);
     }
 
-    public List<DocPreview> getDeletedDocs(String userID, int type) throws Exception{
+    public List<DocPreview> getDeletedDocs(String userID, int bytes) throws Exception{
         List<Doc> list = docMapper.getDeletedDocByUserID(userID);
-        return DocPreview.getPreviewList(list, type);
+        return DocPreview.getPreviewList(list, bytes);
     }
 
     public int isFavorite(String userID, String docID) throws Exception{

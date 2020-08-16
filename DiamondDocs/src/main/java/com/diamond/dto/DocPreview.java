@@ -32,21 +32,21 @@ public class DocPreview {
      * 笨方法转化
      * 转化要求：10字节内容+两字节省略号
      */
-    public void setTitleToPreview(int type) {
+    public void setTitleToPreview(int bytes) {
         String string = this.docTitle;
         int length = 0;
         StringBuilder title = new StringBuilder();
         for (int i = 0; i < string.length(); i++) {
             char c = string.charAt(i);
-            if (c >= 19968 && c <= 40869 && length <= type-2) {
+            if (c >= 19968 && c <= 40869 && length <= bytes-2) {
                 length = length + 2;
-            } else if (!(c >= 19968 && c <= 40869) && length <= type-1) {
+            } else if (!(c >= 19968 && c <= 40869) && length <= bytes-1) {
                 length++;
             } else
                 break;
-            if (length < type) {
+            if (length < bytes) {
                 title.append(c);
-            } else if (length == type) {
+            } else if (length == bytes) {
                 title.append(c);
                 break;
             }

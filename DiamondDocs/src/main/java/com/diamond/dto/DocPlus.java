@@ -11,8 +11,6 @@ public class DocPlus {
     String docTitle;
     String docContent;
     String lastEditTime;
-    int docLimit;
-    int editState;
     String creatorID;
 
     String name;
