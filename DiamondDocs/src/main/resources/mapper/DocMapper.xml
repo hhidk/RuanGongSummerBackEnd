@@ -38,10 +38,16 @@
         where teamID = #{teamID} and isDeleted = 0;
     </select>
 
-    <select id="getDocTeam" parameterType="String" resultType="String">
+    <select id="getDocTeamID" parameterType="String" resultType="String">
         select teamID
         from Doc
         where docID = #{docID} and isDeleted = 0;
+    </select>
+
+    <select id="getCreatorID" parameterType="String" resultType="String">
+        select creatorID
+        from Doc
+        where docID = #{docID};
     </select>
 
     <select id="getDocByUserID" parameterType="String" resultType="Doc">

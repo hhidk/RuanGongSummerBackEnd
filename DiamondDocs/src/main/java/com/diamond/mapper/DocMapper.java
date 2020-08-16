@@ -27,7 +27,9 @@ public interface DocMapper
 
     List<Doc> getDocByTeamID(@Param("teamID") String teamID);
 
-    String getDocTeam(@Param("docID") String docID);
+    String getDocTeamID(@Param("docID") String docID);
+
+    String getCreatorID(@Param("docID") String docID);
 
     List<Doc> getDocByUserID(@Param("userID") String userID);
 

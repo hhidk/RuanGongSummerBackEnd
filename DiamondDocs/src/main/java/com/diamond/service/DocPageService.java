@@ -3,10 +3,7 @@ package com.diamond.service;
 import com.diamond.dto.DocPlus;
 import com.diamond.dto.DocUserPreview;
 import com.diamond.dto.HistoryPlus;
-import com.diamond.mapper.DocMapper;
-import com.diamond.mapper.DocUserMapper;
-import com.diamond.mapper.MemberMapper;
-import com.diamond.mapper.TeamMapper;
+import com.diamond.mapper.*;
 import com.diamond.pojo.Doc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +25,8 @@ public class DocPageService {
     private DocUserMapper docUserMapper;
     @Autowired
     private MemberMapper memberMapper;
+    @Autowired
+    private HistoryMapper historyMapper;
 
     public DocPlus getDoc(String docID) throws Exception{
         Doc doc = docMapper.getDocByDocID(docID);
@@ -42,23 +41,34 @@ public class DocPageService {
     }
 
     public List<HistoryPlus> getDocHistory(String docID) throws Exception{
-        return null;
+        return historyMapper.getDocHistory(docID);
     }
 
     public List<DocUserPreview> getDocCollaborator(String docID) throws Exception{
-        return null;
+        return historyMapper.getDocCollaborator(docID);
     }
 
-    public int tryEditDoc(String userID, String docID) throws Exception{
-        return 0;
+    public int tryEditDoc(String docID) throws Exception{
+        return 1 - docMapper.tryEditDoc(docID);
     }
 
-    public int completeEditDoc(String userID, String docID) throws Exception{
-        return 0;
+    public int completeEditDoc(String docID) throws Exception{
+        return 1 - docMapper.completeEditDoc(docID);
     }
 
-    public int setDocLimit(String userID, String docID) throws Exception{
-        return 0;
+    public int setDocLimit(String userID, String docID, int docLimit) throws Exception{
+        if(docMapper.getCreatorID(docID).equals(userID))
+        {
+            Map<String, Object> map = new HashMap<>();
+            map.put("docID", docID);
+            map.put("docLimit", docLimit);
+            docMapper.setDocLimit(map);
+            return 0;
+        }
+        else
+        {
+            return 1;
+        }
     }
 
     public int getDocLimit(String userID, String docID) throws Exception{

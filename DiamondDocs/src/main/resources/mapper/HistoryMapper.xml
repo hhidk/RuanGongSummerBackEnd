@@ -32,7 +32,7 @@
         where docID = #{docID}
     </select>
 
-    <select id="getDocCollaboratorJ" parameterType="String" resultMap="DocUserPreviewMap">
+    <select id="getDocCollaborator" parameterType="String" resultMap="DocUserPreviewMap">
         select DocUser.userID, userName, imagePath, emailAddress
         from DocUser
         where DocUser.userID in (select userID from History where History.docID = #{docID});

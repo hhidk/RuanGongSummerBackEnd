@@ -64,9 +64,9 @@ public class DocPageController {
     }
 
     @RequestMapping("/tryEditDoc")
-    public int tryEditDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
+    public int tryEditDoc(@RequestParam("docID") String docID){
         try {
-            return docPageService.tryEditDoc(userID, docID);
+            return docPageService.tryEditDoc(docID);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -79,7 +79,7 @@ public class DocPageController {
         try {
             if(editState == 0){
                 historyService.editDoc(userID, docID);
-                return docPageService.completeEditDoc(userID, docID);
+                return docPageService.completeEditDoc(docID);
             }
             return 0;
         }
@@ -90,9 +90,9 @@ public class DocPageController {
     }
 
     @RequestMapping("/setDocLimit")
-    public int setDocLimit(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
+    public int setDocLimit(@RequestParam("userID") String userID, @RequestParam("docID") String docID, @RequestParam("docLimit") int docLimit){
         try {
-            return docPageService.setDocLimit(userID, docID);
+            return docPageService.setDocLimit(userID, docID, docLimit);
         }
         catch (Exception e) {
             e.printStackTrace();
