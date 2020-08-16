@@ -1,5 +1,6 @@
 package com.diamond.mapper;
 
+import com.diamond.dto.DocPlus;
 import com.diamond.pojo.Doc;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,7 +17,7 @@ public interface DocMapper
 
     int addDoc(Doc doc);
 
-    Doc getDocByDocID(@Param("docID") String docID);
+    DocPlus getDocByDocID(@Param("docID") String docID);
 
     List<Doc> getDocByDocTitle(@Param("docTitle") String docTitle);
 
