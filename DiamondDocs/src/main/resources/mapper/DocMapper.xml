@@ -38,6 +38,12 @@
         where teamID = #{teamID} and isDeleted = 0;
     </select>
 
+    <select id="getDocTeam" parameterType="String" resultType="String">
+        select teamID
+        from Doc
+        where docID = #{docID} and isDeleted = 0;
+    </select>
+
     <select id="getDocByUserID" parameterType="String" resultType="Doc">
         select *
         from Doc
@@ -77,6 +83,24 @@
     <update id="recoverDoc" parameterType="String">
         update Doc
         set isDeleted = 0
+        where docID = #{docID};
+    </update>
+
+    <update id="tryEditDoc" parameterType="String">
+        update Doc
+        set editState = 1
+        where docID = #{docID} and editState = 0;
+    </update>
+
+    <update id="completeEditDoc" parameterType="String">
+        update Doc
+        set editState = 0
+        where docID = #{docID} and editState = 1;
+    </update>
+
+    <update id="setDocLimit" parameterType="Map">
+        update Doc
+        set docLimit = #{docLimit}
         where docID = #{docID};
     </update>
 
