@@ -42,9 +42,9 @@ public class TeamSpaceController {
     }
 
     @RequestMapping("/getTeamDocs")
-    public List<DocPreview> getTeamDocs(@RequestParam("teamID") String teamID){
+    public List<DocPreview> getTeamDocs(@RequestParam("teamID") String teamID, @RequestParam("userID") String userID){
         try {
-            return teamSpaceService.getTeamDocs(teamID, 10);
+            return teamSpaceService.getTeamDocs(userID, teamID, 10);
         }
         catch (Exception e){
             e.printStackTrace();
