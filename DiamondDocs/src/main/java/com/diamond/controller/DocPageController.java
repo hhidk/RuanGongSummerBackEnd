@@ -1,6 +1,8 @@
 package com.diamond.controller;
 
 import com.diamond.dto.DocPlus;
+import com.diamond.dto.DocUserPreview;
+import com.diamond.dto.HistoryPlus;
 import com.diamond.service.BrowsesService;
 import com.diamond.service.DocPageService;
 import com.diamond.service.DocService;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*",maxAge = 3600)
@@ -33,6 +36,28 @@ public class DocPageController {
             return docPageService.getDoc(docID);
         }
         catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/getDocHistory")
+    public List<HistoryPlus> getDocHistory(@RequestParam("docID") String docID){
+        try {
+            return null;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/getDocCollaborator")
+    public List<DocUserPreview> getDocCollaborator(@RequestParam("docID") String docID){
+        try {
+            return null;
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return null;
         }
