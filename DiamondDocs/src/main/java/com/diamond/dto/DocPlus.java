@@ -23,7 +23,7 @@ public class DocPlus {
         this.docContent = doc.getDocContent();
         this.createTime = doc.getCreateTime();
         this.lastEditTime = doc.getLastEditTime();
-        this. creatorID = doc.getCreatorID();
+        this.creatorID = doc.getCreatorID();
     }
 
 }
