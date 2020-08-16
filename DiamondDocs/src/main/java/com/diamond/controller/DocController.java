@@ -105,8 +105,8 @@ public class DocController {
     public int batchDeleteDoc(@RequestParam("userID") String userID, @RequestParam("docIDs") String docIDs){
         try {
             List<String> list = FormatHandler.getListString(docIDs);
-            docService.batchDeleteDoc(list);
             historyService.batchDeleteDoc(userID,list);
+            docService.batchDeleteDoc(list);
             return 0;
         }
         catch (Exception e){
