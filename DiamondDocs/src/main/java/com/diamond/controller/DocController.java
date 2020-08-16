@@ -129,7 +129,7 @@ public class DocController {
         }
     }
 
-    @RequestMapping("/docBatchFavorite")
+    /*@RequestMapping("/docBatchFavorite")
     public int batchCollectDoc(@RequestParam("userID") String userID, @RequestParam("docIDs") String docIDs){
         try {
             List<String> list = FormatHandler.getListString(docIDs);
@@ -140,5 +140,5 @@ public class DocController {
             e.printStackTrace();
             return 1;
         }
-    }
+    }*/
 }
