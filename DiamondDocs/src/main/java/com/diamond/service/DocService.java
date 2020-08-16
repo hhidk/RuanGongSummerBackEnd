@@ -66,12 +66,17 @@ public class DocService {
     }
 
     public void collectDoc(String userID, String docID) throws Exception{
-
         Map<String, Object> map = new HashMap<>();
         map.put("userID", userID);
         map.put("docID", docID);
         favoriteMapper.addFavorite(map);
+    }
 
+    public void cancelCollectDoc(String userID, String docID) throws Exception{
+        Map<String, Object> map = new HashMap<>();
+        map.put("userID", userID);
+        map.put("docID", docID);
+        favoriteMapper.deleteFavorite(map);
     }
 
     public void batchDeleteDoc(List<String> docIDs) throws Exception{

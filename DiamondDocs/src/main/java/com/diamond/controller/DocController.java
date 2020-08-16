@@ -89,6 +89,18 @@ public class DocController {
         }
     }
 
+    @RequestMapping("/cancelCollectDoc")
+    public int cancelCollectDoc(@RequestParam("userID") String userID, @RequestParam("docID") String docID){
+        try {
+            docService.cancelCollectDoc(userID, docID);
+            return 0;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+
     @RequestMapping("/docBatchDelete")
     public int batchDeleteDoc(@RequestParam("userID") String userID, @RequestParam("docIDs") String docIDs){
         try {
