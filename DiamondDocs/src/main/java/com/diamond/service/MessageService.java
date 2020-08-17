@@ -43,6 +43,26 @@ public class MessageService {
         messageMapper.addMessage(message);
     }
 
+    public void addComment(String docID, String userID, String commentContent, String replyID) throws Exception
+    {
+        Message message = new Message();
+        message.setMsgID(DiyUUID.generateMsgID());
+        if(replyID.equals("0"))
+        {
+            message.setMsgType(9);
+            message.setTargetUserID(docMapper.getCreatorID(docID));
+        }
+        else
+        {
+            message.setMsgType(10);
+            message.setTargetUserID(commentMapper.getCommentByCommentID(replyID).getUserID());
+        }
+        message.setMsgContent(commentContent);
+        message.setUserID(userID);
+
+        messageMapper.addMessage(message);
+    }
+
     public void acceptMember(String userID, String targetUserID, String teamID, String msgID) throws Exception
     {
         Message message = new Message();
@@ -182,18 +202,17 @@ public class MessageService {
 
     public List<CommentMessage> getCommentMsg(String userID) throws Exception
     {
-        List<CommentMessage> list = new ArrayList<>();
-        list = messageMapper.getCommentMsg(userID);
+        List<CommentMessage> list = messageMapper.getCommentMsg(userID);
         for (CommentMessage commentMessage : list)
         {
             commentMessage.setCreateTime(FormatHandler.AlterTimeFormat(commentMessage.getCreateTime()));
             if (commentMessage.getMsgType() == 9)
             {
-                commentMessage.setContent(docMapper.getDocByDocID(commentMessage.getID()).getDocTitle());
+                commentMessage.setOriginalContent(docMapper.getDocByDocID(commentMessage.getID()).getDocTitle());
             }
             else if (commentMessage.getMsgType() == 10)
             {
-                commentMessage.setContent(commentMapper.getCommentByCommentID(commentMessage.getID()).getCommentContent());
+                commentMessage.setOriginalContent(commentMapper.getCommentByCommentID(commentMessage.getID()).getCommentContent());
             }
 
             if(commentMessage.getIsRead() == 0)
