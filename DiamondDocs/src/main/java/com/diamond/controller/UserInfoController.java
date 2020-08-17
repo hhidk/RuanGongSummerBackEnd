@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @CrossOrigin(origins = "*",maxAge = 3600)
 public class UserInfoController {
@@ -133,6 +136,21 @@ public class UserInfoController {
         {
             e.printStackTrace();
             return 1;
+        }
+    }
+
+    @RequestMapping("/getUserAchievement")
+    public Map<String,Integer> getUserAchievement(@RequestParam("userID") String userID){
+        try{
+            return userInfoService.getUserAchievement(userID);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            Map<String, Integer> map = new HashMap<>();
+            map.put("teamNum",0);
+            map.put("collaboratorNum",0);
+            map.put("docNum",0);
+            return map;
         }
     }
 
