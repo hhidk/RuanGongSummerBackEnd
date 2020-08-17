@@ -71,7 +71,7 @@
     <select id="getCommentMsg" parameterType="String" resultMap="CommentMsgMap">
         select msgID, DocUser.userID, userName, imagePath, msgType, createTime, isRead, teamID, msgContent
         from Message, DocUser
-        where Message.targetUserID = #{userID} and DocUser.userID = Message.userID
+        where Message.targetUserID = #{userID} and DocUser.userID = Message.userID and (msgType = 9 or msgType = 10)
         order by createTime desc;
     </select>
 
