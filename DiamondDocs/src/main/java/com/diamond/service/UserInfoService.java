@@ -1,6 +1,7 @@
 package com.diamond.service;
 
 import com.diamond.mapper.DocUserMapper;
+import com.diamond.mapper.HistoryMapper;
 import com.diamond.mapper.MemberMapper;
 import com.diamond.mapper.TeamMapper;
 import com.diamond.pojo.DocUser;
@@ -20,6 +21,8 @@ public class UserInfoService {
     private DocUserMapper docUserMapper;
     @Autowired
     private MemberMapper memberMapper;
+    @Autowired
+    private HistoryMapper historyMapper;
 
     public int signUp(String name, String emailAddress, String password, String password2) throws Exception{
         if(!Validation.checkEmailFormat(emailAddress))
@@ -130,9 +133,9 @@ public class UserInfoService {
 
     public Map<String, Integer> getUserAchievement(String userID) {
         Map<String, Integer> map = new HashMap<>();
-        map.put("teamNum", memberMapper.getTeamByUserID(userID).size());
-        map.put("collaboratorNum",memberMapper.getCollaboratorNum(userID));
-        map.put("docNum",0);
+        map.put("teamNum", memberMapper.getTeamNum(userID));
+        map.put("collaboratorNum", memberMapper.getCollaboratorNum(userID));
+        map.put("docNum", historyMapper.getDocNum(userID));
         return map;
     }
 

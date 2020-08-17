@@ -26,6 +26,8 @@ public interface MemberMapper {
      */
     int getCollaboratorNum(@Param("userID") String userID);
 
+    int getTeamNum(@Param("userID") String userID);
+
     /*
     修改用户身份
     用map进行传参，key分别为userID和userIdentity

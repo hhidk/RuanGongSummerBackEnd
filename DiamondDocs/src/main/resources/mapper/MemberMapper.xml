@@ -17,6 +17,12 @@
         where A.userID = #{userID} and A.teamID = B.teamID and A.userID != B.userID;
     </select>
 
+    <select id="getTeamNum" parameterType="String" resultType="int">
+        select count(distinct teamID)
+        from Member
+        where userID = #{userID};
+    </select>
+
     <update id="updateDocUserIdentity" parameterType="Map">
         update Member
         set userIdentity = #{userIdentity}
