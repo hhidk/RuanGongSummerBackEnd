@@ -28,6 +28,7 @@
         <result column="imagePath" property="imagePath"/>
         <result column="msgType" property="msgType"/>
         <result column="teamID" property="ID"/>
+        <result column="msgContent" property="replyContent"/>
         <result column="createTime" property="createTime"/>
         <result column="isRead" property="isRead"/>
     </resultMap>
@@ -68,9 +69,9 @@
     </select>
 
     <select id="getCommentMsg" parameterType="String" resultMap="CommentMsgMap">
-        select msgID, DocUser.userID, userName, imagePath, msgType, createTime, isRead, teamID
+        select msgID, DocUser.userID, userName, imagePath, msgType, createTime, isRead, teamID, msgContent
         from Message, DocUser
-        where Message.targetUserID = #{userID} and DocUser.userID = Message.userID
+        where Message.targetUserID = #{userID} and DocUser.userID = Message.userID and (msgType = 9 or msgType = 10)
         order by createTime desc;
     </select>
 

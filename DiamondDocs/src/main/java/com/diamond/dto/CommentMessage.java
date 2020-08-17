@@ -11,7 +11,8 @@ public class CommentMessage
     String imagePath;
     String createTime;
     String ID;
-    String content;
+    String originalContent;
+    String replyContent;
     int msgType;
     int isRead;
 }

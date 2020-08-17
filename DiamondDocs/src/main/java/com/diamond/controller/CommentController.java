@@ -2,6 +2,7 @@ package com.diamond.controller;
 
 import com.diamond.dto.CommentPlus;
 import com.diamond.service.CommentService;
+import com.diamond.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +17,15 @@ public class CommentController {
 
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private MessageService messageService;
 
     @RequestMapping("/addComment")
     public int addComment(@RequestParam("docID") String docID, @RequestParam("userID") String userID,
-                          @RequestParam("commentContent") String commentContent,@RequestParam("replyID") String replyID)
+                          @RequestParam("commentContent") String commentContent, @RequestParam("replyID") String replyID)
     {
         try {
+            messageService.addComment(docID, userID, commentContent, replyID);
             return commentService.addComment(docID, userID, commentContent, replyID);
         }
         catch (Exception e){
