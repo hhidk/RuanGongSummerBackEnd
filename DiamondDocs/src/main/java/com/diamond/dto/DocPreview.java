@@ -18,6 +18,7 @@ import java.util.List;
 public class DocPreview {
     String docID;
     String docTitle;
+    String previewTitle;
     String creatorID;
     String lastEditTime;
     int isFavorite;
@@ -55,14 +56,14 @@ public class DocPreview {
         if (!string.equals(title.toString()))
             title.append("…");
 
-        this.docTitle = title.toString();
+        this.previewTitle = title.toString();
     }
 
-    public static List<DocPreview> getPreviewList(List<Doc> docList, int type){
+    public static List<DocPreview> getPreviewList(List<Doc> docList, int bytes){
         List<DocPreview> list = new ArrayList<>();
         for (Doc doc : docList) {
             DocPreview docPreview = new DocPreview(doc);
-            docPreview.setTitleToPreview(type);
+            docPreview.setTitleToPreview(bytes);
             list.add(docPreview);
         }
         return list;
