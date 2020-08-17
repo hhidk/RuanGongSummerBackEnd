@@ -44,4 +44,10 @@
         where docID = #{docID} and DocUser.userID = History.userID;
     </select>
 
+    <select id="getDocNum" parameterType="String" resultType="int">
+        select count(distinct docID)
+        from History
+        where userID = #{userID};
+    </select>
+
 </mapper>

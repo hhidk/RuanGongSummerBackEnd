@@ -21,4 +21,6 @@ public interface HistoryMapper
     List<DocUserPreview> getDocCollaborator(@Param("docID") String docID);
 
     List<HistoryPlus> getDocHistory(@Param("docID") String docID);
+
+    int getDocNum(@Param("userID") String userID);
 }
