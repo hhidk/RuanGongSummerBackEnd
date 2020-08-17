@@ -2,9 +2,11 @@ package com.diamond.controller;
 
 import com.diamond.dto.DocPlus;
 import com.diamond.dto.DocPreview;
+import com.diamond.pojo.Template;
 import com.diamond.service.BrowsesService;
 import com.diamond.service.DocService;
 import com.diamond.service.HistoryService;
+import com.diamond.service.TemplateService;
 import com.diamond.utils.FormatHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.UsesSunHttpServer;
@@ -23,11 +25,38 @@ public class DocController {
     private DocService docService;
     @Autowired
     private HistoryService historyService;
+    @Autowired
+    private TemplateService templateService;
 
     @RequestMapping("/addDoc")
     public String addDoc(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID){
         try {
             String docID = docService.addDoc(userID,teamID);
+            historyService.addDoc(userID,docID);
+            return docID;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "1";
+        }
+    }
+
+    @RequestMapping("/getAllTemplate")
+    public List<Template> getAllTemplate(){
+        try {
+            return templateService.getAllTemplate();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @RequestMapping("/addDocWithTemplate")
+    public String addDocWithTemplate(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID,
+                                     @RequestParam("templateID") String templateID){
+        try {
+            String docID = docService.addDocWithTemplate(userID,teamID,templateID);
             historyService.addDoc(userID,docID);
             return docID;
         }
