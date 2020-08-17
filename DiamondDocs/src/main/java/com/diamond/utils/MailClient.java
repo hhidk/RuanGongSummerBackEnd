@@ -17,7 +17,7 @@ public class MailClient {
 
     @Value("${spring.mail.username}")
     private String from;
-    @Value("欢迎加入金刚石文档！")
+    @Value("欢迎加入带得栏文档！")
     private String verificationSubject;
 
     public int generateVerificationCode(){

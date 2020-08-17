@@ -24,24 +24,25 @@ public class UserInfoService {
     @Autowired
     private HistoryMapper historyMapper;
 
-    public int signUp(String name, String emailAddress, String password, String password2) throws Exception{
+    public String signUp(String name, String emailAddress, String password, String password2) throws Exception{
         if(!Validation.checkEmailFormat(emailAddress))
-            return 1;
+            return "1";
         else if(docUserMapper.getDocUserByEmailAddress(emailAddress) != null)
-            return 4;
+            return "4";
         else if(!password.equals(password2))
-            return 2;
+            return "2";
         else if(!Validation.checkPasswordFormat(password))
-            return 3;
+            return "3";
 
         DocUser user = new DocUser();
-        user.setUserID(DiyUUID.generateUserID());
+        String userID = DiyUUID.generateUserID();
+        user.setUserID(userID);
         user.setEmailAddress(emailAddress);
         user.setUserName(name);
         user.setUserPassword(password);
         user.setImagePath("http://39.99.154.244:8080/IceCent/matutu.jpg");
         docUserMapper.addDocUser(user);
-        return 0;
+        return userID;
     }
 
     public DocUser login(String name, String password) throws Exception {

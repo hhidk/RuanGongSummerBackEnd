@@ -45,6 +45,19 @@ public class DocService {
         return docID;
     }
 
+    public String addNewDoc(String userID) throws Exception{
+        Doc doc = new Doc();
+        String docID = DiyUUID.generateDocID();
+        doc.setCreatorID(userID);
+        doc.setDocID(docID);
+        doc.setDocTitle("带得栏文档欢迎你");
+        doc.setDocContent("<h1 style=\"text-align:center;\">欢迎来到带得栏文档</h1><h2>在这里，你可以做什么？</h2><p>&nbsp;</p><p>团队协作，文档共享，贴心交互</p><p>&nbsp;</p><h2>关于我们</h2><p>&nbsp;</p><p>本网站由带得栏项目团队开发，同时欢迎光临<span style=\"background-color:hsl(180, 75%, 60%);\"><u>带得栏论坛（现在还不能用）</u></span></p><p>&nbsp;</p><hr><p>我编不下去了，谁来帮我多编一点。</p>");
+        doc.setDocLimit(0);
+        doc.setIsDeleted(0);
+        docMapper.addDoc(doc);
+        return docID;
+    }
+
     public String addDocWithTemplate(String userID, String teamID, String templateID) throws Exception {
         Doc doc = new Doc();
         String docID = DiyUUID.generateDocID();

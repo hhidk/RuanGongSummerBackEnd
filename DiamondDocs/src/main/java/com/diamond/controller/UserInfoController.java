@@ -1,6 +1,8 @@
 package com.diamond.controller;
 
 import com.diamond.pojo.DocUser;
+import com.diamond.service.BrowsesService;
+import com.diamond.service.DocService;
 import com.diamond.service.UserInfoService;
 import com.diamond.utils.MailClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,10 @@ public class UserInfoController {
     private MailClient mailClient;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private DocService docService;
+    @Autowired
+    private BrowsesService browsesService;
 
     @RequestMapping("/emailVerification")
     public int emailVerification(@RequestParam("emailAddress") String emailAddress){
@@ -38,7 +44,13 @@ public class UserInfoController {
     public int signUp(@RequestParam("name") String name, @RequestParam("emailAddress") String emailAddress,
                       @RequestParam("password") String password, @RequestParam("password2") String password2){
         try {
-            return userInfoService.signUp(name,emailAddress,password,password2);
+            String result = userInfoService.signUp(name,emailAddress,password,password2);
+            if(result.length() != 1){
+                String docID = docService.addNewDoc(result);
+                browsesService.browseDoc(result, docID);
+                return 0;
+            }
+            return Integer.parseInt(result);
         }
         catch (Exception e){
             e.printStackTrace();
