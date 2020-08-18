@@ -40,7 +40,7 @@ public class UserInfoService {
         user.setEmailAddress(emailAddress);
         user.setUserName(name);
         user.setUserPassword(password);
-        user.setImagePath("http://39.99.154.244:8080/IceCent/matutu.jpg");
+        user.setImagePath("http://39.99.154.244:8080/IceCent/deadline2.jpg");
         docUserMapper.addDocUser(user);
         return userID;
     }
