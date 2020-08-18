@@ -33,6 +33,21 @@ public class FormatHandler {
         }
     }
 
+    //判断两个字符串类型时间的时间差，单位为分钟
+    public static long calculateTimeDifference(String time1, String time2){
+        try{
+            SimpleDateFormat sqlFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date1 = sqlFormat.parse(time1);
+            Date date2 = sqlFormat.parse(time2);
+            long l=date2.getTime()-date1.getTime();
+            return l/(60*1000);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 1000000000;
+        }
+    }
+
     public static String AlterNumFormat(int num){
         try {
             StringBuilder s=new StringBuilder();

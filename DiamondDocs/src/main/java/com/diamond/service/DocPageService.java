@@ -43,9 +43,14 @@ public class DocPageService {
 
     public List<HistoryPlus> getDocHistory(String docID) throws Exception{
         List<HistoryPlus> list = historyMapper.getDocHistory(docID);
-        for (HistoryPlus historyPlus : list){
-            if(list.indexOf(historyPlus) == 0)
-                continue;
+        for (int i=1 ; i<list.size() ; i++){
+            HistoryPlus history2 = list.get(i);
+            HistoryPlus history1 = list.get(i-1);
+            if(history1.getUserID().equals(history2.getUserID()) && history1.getOperation()==history2.getOperation())
+                if(FormatHandler.calculateTimeDifference(history1.getOperateTime(),history2.getOperateTime()) < 10){
+                    list.remove(history1);
+                    i--;
+                }
         }
         for (HistoryPlus historyPlus : list)
             historyPlus.setOperateTime(FormatHandler.AlterTimeFormat(historyPlus.getOperateTime()));
