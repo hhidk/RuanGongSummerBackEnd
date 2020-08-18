@@ -50,11 +50,13 @@ public class MessageService {
         if(replyID.equals("0"))
         {
             message.setMsgType(9);
+            message.setTeamID(docID);
             message.setTargetUserID(docMapper.getCreatorID(docID));
         }
         else
         {
             message.setMsgType(10);
+            message.setTeamID(replyID);
             message.setTargetUserID(commentMapper.getCommentByCommentID(replyID).getUserID());
         }
         message.setMsgContent(commentContent);
