@@ -123,24 +123,20 @@ public class DocPageController {
     }
 
     @RequestMapping("/uploadImage")
-    public Map<String, Object> uploadImage(MultipartFile image, @RequestParam("docID") String docID){
+    public Map<String, Object> uploadImage(MultipartFile upload){
         try{
             String dirPath = "/root/docimages";
             File dir = new File(dirPath);
             if(!dir.exists())
                 dir.mkdirs();
 
-            String imageName = docID + "_" +DiyUUID.generateImageID() + "_" +image.getOriginalFilename();
+            String imageName = DiyUUID.generateImageID() + "_" +upload.getOriginalFilename();
             String filePath = dirPath + "/" + imageName;
             File savedImg=new File(filePath);
-            image.transferTo(savedImg);
+            upload.transferTo(savedImg);
 
             String url = "http://39.99.154.244:8080/docimages/"+imageName;
             Map<String, Object> map = new HashMap<>();
-            Map<String, Object> subMap = new HashMap<>();
-            map.put("uploaded","true");
-            subMap.put("message","no error");
-            map.put("error",subMap);
             map.put("url",url);
             return map;
         }
@@ -149,10 +145,8 @@ public class DocPageController {
             e.printStackTrace();
             Map<String, Object> map = new HashMap<>();
             Map<String, Object> subMap = new HashMap<>();
-            map.put("uploaded","false");
-            subMap.put("message","file extension not allow");
+            subMap.put("message","file upload failed.");
             map.put("error",subMap);
-            map.put("url","");
             return map;
         }
     }

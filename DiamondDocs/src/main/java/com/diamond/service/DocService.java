@@ -65,7 +65,7 @@ public class DocService {
 
         doc.setCreatorID(userID);
         doc.setDocID(docID);
-        doc.setDocTitle("无标题——" + template.getTemplateName());
+        doc.setDocTitle("[模板]" + template.getTemplateName());
         doc.setDocContent(template.getTemplateContent());
         doc.setDocLimit(0);
         doc.setIsDeleted(0);
