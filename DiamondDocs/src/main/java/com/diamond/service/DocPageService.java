@@ -43,6 +43,10 @@ public class DocPageService {
 
     public List<HistoryPlus> getDocHistory(String docID) throws Exception{
         List<HistoryPlus> list = historyMapper.getDocHistory(docID);
+        for (HistoryPlus historyPlus : list){
+            if(list.indexOf(historyPlus) == 0)
+                continue;
+        }
         for (HistoryPlus historyPlus : list)
             historyPlus.setOperateTime(FormatHandler.AlterTimeFormat(historyPlus.getOperateTime()));
         return list;
