@@ -11,6 +11,7 @@
         <result column="userName" property="userName"/>
         <result column="operation" property="operation"/>
         <result column="operateTime" property="operateTime"/>
+        <result column="imagePath" property="imagePath"/>
     </resultMap>
 
     <resultMap id="DocUserPreviewMap" type="DocUserPreview">
@@ -39,7 +40,7 @@
     </select>
 
     <select id="getDocHistory" parameterType="String" resultMap="HistoryPlusMap">
-        select DocUser.userID, userName, operation, operateTime
+        select DocUser.userID, userName, operation, operateTime, imagePath
         from History, DocUser
         where docID = #{docID} and DocUser.userID = History.userID;
     </select>
