@@ -1,6 +1,7 @@
 package com.diamond.dto;
 
 import com.diamond.pojo.Doc;
+import com.diamond.utils.FormatHandler;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,8 +23,8 @@ public class DocPlus {
         this.docID = doc.getDocID();
         this.docTitle = doc.getDocTitle();
         this.docContent = doc.getDocContent();
-        this.createTime = doc.getCreateTime();
-        this.lastEditTime = doc.getLastEditTime();
+        this.createTime = FormatHandler.AlterTimeFormat(doc.getCreateTime());
+        this.lastEditTime = FormatHandler.AlterTimeFormat(doc.getLastEditTime());
         this.creatorID = doc.getCreatorID();
         this.docLimit = doc.getDocLimit();
     }

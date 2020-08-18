@@ -9,23 +9,37 @@ public class FormatHandler {
     public static String AlterTimeFormat(String sqltime){
         try {
             SimpleDateFormat sqlFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date=sqlFormat.parse(sqltime);
             Date nowDate=new Date();
             String nowtime=sqlFormat.format(nowDate);
-            Date date=sqlFormat.parse(sqltime);
 
             long l=nowDate.getTime()-date.getTime();
             long day=l/(24*60*60*1000);
             long hour=(l/(60*60*1000)-day*24);
             long min=((l/(60*1000))-day*24*60-hour*60);
             //long second=(l/1000-day*24*60*60-hour*60*60-min*60);
+
+            int nowYear = Integer.parseInt(nowtime.substring(0,4));
+            int nowMonth = Integer.parseInt(nowtime.substring(5,7));
+            int nowDay = Integer.parseInt(nowtime.substring(8,10));
+            int sqlYear = Integer.parseInt(sqltime.substring(0,4));
+            int sqlMonth = Integer.parseInt(sqltime.substring(5,7));
+            int sqlDay = Integer.parseInt(sqltime.substring(8,10));
+
             if(day<1 && min<1)
                 return "刚刚";
             else if(day<1 && min<60)
                 return min+"分钟前";
             else if(day<1 && hour<24)
                 return hour+"小时"+min+"分钟前";
-            else
+            else if(nowYear != sqlYear)
                 return sqltime.substring(0,16);
+            else if(nowMonth == sqlMonth && nowDay == sqlDay+1)
+                return "昨天 "+sqltime.substring(11,16);
+            else if(nowMonth == sqlMonth && nowDay == sqlDay+2)
+                return "前天 "+sqltime.substring(11,16);
+            else
+                return sqltime.substring(5,16);
         }
         catch (Exception e){
             e.printStackTrace();

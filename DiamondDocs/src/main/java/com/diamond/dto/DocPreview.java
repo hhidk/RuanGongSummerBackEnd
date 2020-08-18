@@ -27,7 +27,7 @@ public class DocPreview {
         this.docID = doc.getDocID();
         this.docTitle = doc.getDocTitle();
         this.creatorID = doc.getCreatorID();
-        this.lastEditTime = doc.getLastEditTime();
+        this.lastEditTime = FormatHandler.AlterTimeFormat(doc.getLastEditTime());
     }
 
     /*
