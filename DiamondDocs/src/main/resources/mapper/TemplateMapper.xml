@@ -5,6 +5,15 @@
 
 <mapper namespace="com.diamond.mapper.TemplateMapper">
 
+    <select id="getAllTemplate" resultType="Template">
+        select *
+        from Template
+    </select>
 
+    <select id="getTemplateByTemplateID" parameterType="String" resultType="Template">
+        select *
+        from Template
+        where templateID = #{templateID}
+    </select>
 
 </mapper>
