@@ -34,6 +34,7 @@
         select commentID, Comment.userID, commentContent, createTime, userName, imagePath, replyID
         from Comment, DocUser
         where docID = #{docID} and Comment.userID = DocUser.userID;
+        order by createTime desc
     </select>
 
     <select id="getCommentByUserID" parameterType="String" resultMap="CommentPlusMap">
