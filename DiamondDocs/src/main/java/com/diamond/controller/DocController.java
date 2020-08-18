@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*",maxAge = 3600)
@@ -53,16 +54,16 @@ public class DocController {
     }
 
     @RequestMapping("/addDocWithTemplate")
-    public String addDocWithTemplate(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID,
+    public Map<String,String> addDocWithTemplate(@RequestParam("userID") String userID, @RequestParam("teamID") String teamID,
                                      @RequestParam("templateID") String templateID){
         try {
-            String docID = docService.addDocWithTemplate(userID,teamID,templateID);
-            historyService.addDoc(userID,docID);
-            return docID;
+            Map<String, String> map = docService.addDocWithTemplate(userID,teamID,templateID);
+            historyService.addDoc(userID,map.get("docID"));
+            return map;
         }
         catch (Exception e){
             e.printStackTrace();
-            return "1";
+            return null;
         }
     }
 

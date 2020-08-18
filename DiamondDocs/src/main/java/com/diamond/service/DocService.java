@@ -58,7 +58,7 @@ public class DocService {
         return docID;
     }
 
-    public String addDocWithTemplate(String userID, String teamID, String templateID) throws Exception {
+    public Map<String,String> addDocWithTemplate(String userID, String teamID, String templateID) throws Exception {
         Doc doc = new Doc();
         String docID = DiyUUID.generateDocID();
         Template template = templateMapper.getTemplateByTemplateID(templateID);
@@ -73,7 +73,10 @@ public class DocService {
             doc.setTeamID(teamID);
 
         docMapper.addDoc(doc);
-        return docID;
+        Map<String,String> map = new HashMap<>();
+        map.put("docID", docID);
+        map.put("docTitle", doc.getDocTitle());
+        return map;
     }
 
     public void editDocTitle(String docID, String docTitle) throws Exception{

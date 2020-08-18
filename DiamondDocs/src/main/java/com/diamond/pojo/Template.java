@@ -7,5 +7,5 @@ public class Template {
     String templateID;
     String templateName;
     String templateContent;
-    String previewImage;
+    //String previewImage;
 }
