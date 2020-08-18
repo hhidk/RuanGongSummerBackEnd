@@ -1,5 +1,7 @@
 package com.diamond.controller;
 
+import com.diamond.dto.DocUserPreview;
+import com.diamond.mapper.DocUserMapper;
 import com.diamond.pojo.DocUser;
 import com.diamond.service.BrowsesService;
 import com.diamond.service.DocService;
@@ -163,6 +165,20 @@ public class UserInfoController {
             map.put("collaboratorNum",0);
             map.put("docNum",0);
             return map;
+        }
+    }
+
+
+
+    @RequestMapping("/getUserInfo")
+    public DocUserPreview getUserInfo(@RequestParam("userID") String userID)
+    {
+        try {
+            return userInfoService.getUserInfo(userID);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
         }
     }
 
