@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*",maxAge = 3600)
@@ -121,7 +123,7 @@ public class DocPageController {
     }
 
     @RequestMapping("/uploadImage")
-    public String uploadImage(MultipartFile image, @RequestParam("docID") String docID){
+    public Map<String, Object> uploadImage(MultipartFile image, @RequestParam("docID") String docID){
         try{
             String dirPath = "/root/docimages";
             File dir = new File(dirPath);
@@ -133,13 +135,25 @@ public class DocPageController {
             File savedImg=new File(filePath);
             image.transferTo(savedImg);
 
-            String accessPath = "http://39.99.154.244:8080/docimages/"+imageName;
-            return accessPath;
+            String url = "http://39.99.154.244:8080/docimages/"+imageName;
+            Map<String, Object> map = new HashMap<>();
+            Map<String, Object> subMap = new HashMap<>();
+            map.put("uploaded","true");
+            subMap.put("message","no error");
+            map.put("error",subMap);
+            map.put("url",url);
+            return map;
         }
         catch (Exception e){
             System.out.println("图片上传产生异常");
             e.printStackTrace();
-            return null;
+            Map<String, Object> map = new HashMap<>();
+            Map<String, Object> subMap = new HashMap<>();
+            map.put("uploaded","false");
+            subMap.put("message","file extension not allow");
+            map.put("error",subMap);
+            map.put("url","");
+            return map;
         }
     }
 }
