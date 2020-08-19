@@ -15,7 +15,7 @@ class DocsApplicationTests {
 
     @Test
     void contextLoads() {
-        System.out.println(FormatHandler.AlterTimeFormat("2020-08-19 09:30:56.870"));
+
     }
 
 }
