@@ -1,9 +1,9 @@
 package com.diamond.service;
 
+import com.diamond.dto.DocUserPreview;
 import com.diamond.mapper.DocUserMapper;
 import com.diamond.mapper.HistoryMapper;
 import com.diamond.mapper.MemberMapper;
-import com.diamond.mapper.TeamMapper;
 import com.diamond.pojo.DocUser;
 import com.diamond.utils.DiyUUID;
 import com.diamond.utils.Validation;
@@ -85,7 +85,7 @@ public class UserInfoService {
         return 0;
     }
 
-    public int setUserName(String userID, String userName)
+    public int setUserName(String userID, String userName) throws Exception
     {
         Map<String, Object> map = new HashMap<>();
         map.put("userID", userID);
@@ -94,7 +94,7 @@ public class UserInfoService {
         return 0;
     }
 
-    public int setUserPassword(String userID, String userPassword)
+    public int setUserPassword(String userID, String userPassword) throws Exception
     {
         Map<String, Object> map = new HashMap<>();
         map.put("userID", userID);
@@ -103,7 +103,7 @@ public class UserInfoService {
         return 0;
     }
 
-    public int setEmailAddress(String userID, String emailAddress)
+    public int setEmailAddress(String userID, String emailAddress) throws Exception
     {
         if(docUserMapper.getDocUserByEmailAddress(emailAddress) != null)
             return 1;
@@ -114,7 +114,7 @@ public class UserInfoService {
         return 0;
     }
 
-    public int setImagePath(String userID, String imagePath)
+    public int setImagePath(String userID, String imagePath) throws Exception
     {
         Map<String, Object> map = new HashMap<>();
         map.put("userID", userID);
@@ -123,7 +123,7 @@ public class UserInfoService {
         return 0;
     }
 
-    public int setMobile(String userID, String mobile)
+    public int setMobile(String userID, String mobile) throws Exception
     {
         Map<String, Object> map = new HashMap<>();
         map.put("userID", userID);
@@ -132,12 +132,18 @@ public class UserInfoService {
         return 0;
     }
 
-    public Map<String, Integer> getUserAchievement(String userID) {
+    public Map<String, Integer> getUserAchievement(String userID) throws Exception {
         Map<String, Integer> map = new HashMap<>();
         map.put("teamNum", memberMapper.getTeamNum(userID));
         map.put("collaboratorNum", memberMapper.getCollaboratorNum(userID));
         map.put("docNum", historyMapper.getDocNum(userID));
         return map;
+    }
+
+    public DocUserPreview getUserInfo(String userID) throws Exception
+    {
+        DocUserPreview docUserPreview = new DocUserPreview(docUserMapper.getUserByID(userID));
+        return docUserPreview;
     }
 
 }

@@ -8,4 +8,5 @@ public class HistoryPlus {
     String userName;
     int operation;
     String operateTime;
+    String imagePath;
 }
