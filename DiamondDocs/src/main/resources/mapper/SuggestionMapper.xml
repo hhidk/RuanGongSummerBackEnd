@@ -11,8 +11,7 @@
 
     <select id="getCollaboratorInfo" parameterType="String" resultType="DocUser">
         select *
-        from DocUser
-        where userID in (select userID from Member, Doc where docID = #{docID} and Doc.teamID = Member.teamID);
+        from DocUser;
     </select>
 
     <select id="getSuggestion" parameterType="String" resultType="String">
