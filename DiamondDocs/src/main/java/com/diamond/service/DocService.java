@@ -50,6 +50,8 @@ public class DocService {
 
         String docID = DiyUUID.generateDocID();
         doc.setDocID(docID);
+        doc.setDocTitle("[副本]"+doc.getDocTitle());
+        doc.setDocLimit(0);
         doc.setTeamID(null);
         docMapper.addDoc(doc);
         return docID;
