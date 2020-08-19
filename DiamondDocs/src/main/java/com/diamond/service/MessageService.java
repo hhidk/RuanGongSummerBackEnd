@@ -235,7 +235,7 @@ public class MessageService {
         for (SystemMessage systemMessage : list)
         {
             systemMessage.setCreateTime(FormatHandler.AlterTimeFormat(systemMessage.getCreateTime()));
-            if (systemMessage.getMsgType() == 8)
+            if (systemMessage.getMsgType() == 8 || systemMessage.getMsgType() == 3 || systemMessage.getMsgType() == 4)
             {
                 systemMessage.setName(teamMapper.getTeamByTeamID(messageMapper.getMsgByMsgID(systemMessage.getMsgID()).getTeamID()).getTeamName());
             }
