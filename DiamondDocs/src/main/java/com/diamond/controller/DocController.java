@@ -45,7 +45,7 @@ public class DocController {
     @RequestMapping("copyDoc")
     public String copyDoc(@RequestParam("userID") String userID, @RequestParam("copyDocID") String copyDocID){
         try {
-            String docID = docService.copyDoc(copyDocID);
+            String docID = docService.copyDoc(userID, copyDocID);
             historyService.addDoc(userID,docID);
             return docID;
         }
