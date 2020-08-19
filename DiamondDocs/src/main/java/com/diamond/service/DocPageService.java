@@ -105,7 +105,7 @@ public class DocPageService {
             int userIdentity;
 
             //判断userIdentity
-            if(userID == creatorID)
+            if(userID.equals(creatorID))
                 userIdentity = 0;
             else if(memberMapper.checkIsInGroup(userID, teamID) == null)
                 userIdentity = 2;
