@@ -101,11 +101,13 @@ public class DocPageService {
         }
         //团队文档
         else {
-            //0同组管理员，1同组成员，2组外其他成员
+            //0同组管理员或自己，1同组成员，2组外其他成员
             int userIdentity;
 
             //判断userIdentity
-            if(memberMapper.checkIsInGroup(userID, teamID) == null)
+            if(userID == creatorID)
+                userIdentity = 0;
+            else if(memberMapper.checkIsInGroup(userID, teamID) == null)
                 userIdentity = 2;
             else if(memberMapper.getDocUserIdentity(userID, teamID) == 0)
                 userIdentity = 1;

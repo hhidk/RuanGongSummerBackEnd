@@ -28,7 +28,7 @@ public class FormatHandler {
 
             if(day<1 && min<1)
                 return "刚刚";
-            else if(day<1 && min<60)
+            else if(day<1 && min<60 && hour<1)
                 return min+"分钟前";
             else if(day<1 && hour<24)
                 return hour+"小时"+min+"分钟前";
