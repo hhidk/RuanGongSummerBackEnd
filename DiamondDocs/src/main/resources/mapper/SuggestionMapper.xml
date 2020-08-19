@@ -12,7 +12,7 @@
     <select id="getCollaboratorInfo" parameterType="String" resultType="DocUser">
         select *
         from DocUser
-        where userID in (select userID from History where docID = #{docIDd});
+        where userID in (select userID from History where docID = #{docID});
     </select>
 
     <select id="getSuggestion" parameterType="String" resultType="String">
