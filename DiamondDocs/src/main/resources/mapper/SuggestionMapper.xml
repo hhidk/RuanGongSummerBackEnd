@@ -5,10 +5,26 @@
 
 <mapper namespace="com.diamond.mapper.SuggestionMapper">
 
-    <select id="getSuggestionByID" parameterType="String" resultType="Suggestion">
+    <insert id="addSuggestion" parameterType="Map">
+        insert into Suggestion (id, content) VALUES (#{id}, #{content});
+    </insert>
+
+    <select id="getCollaboratorInfo" parameterType="String" resultType="DocUser">
         select *
+        from DocUser
+        where userID in (select userID from History where docID = #{docIDd});
+    </select>
+
+    <select id="getSuggestion" parameterType="String" resultType="String">
+        select content
         from Suggestion
         where id = #{id};
     </select>
+
+    <delete id="deleteSuggestion" parameterType="String">
+        delete
+        from Suggestion
+        where id = #{id};
+    </delete>
 
 </mapper>

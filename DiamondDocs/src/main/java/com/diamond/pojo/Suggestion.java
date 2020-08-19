@@ -2,12 +2,11 @@ package com.diamond.pojo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Suggestion
+public class Suggestion implements Serializable
 {
     String id;
-    String type;
-    String authorId;
-    String createdAt;
-    boolean hasComments;
+    String content;
 }
