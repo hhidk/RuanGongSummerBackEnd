@@ -45,6 +45,16 @@ public class DocService {
         return docID;
     }
 
+    public String copyDoc(String copyDocID) throws Exception{
+        Doc doc = docMapper.getDocByDocID(copyDocID);
+
+        String docID = DiyUUID.generateDocID();
+        doc.setDocID(docID);
+        doc.setTeamID(null);
+        docMapper.addDoc(doc);
+        return docID;
+    }
+
     public String addNewDoc(String userID) throws Exception{
         Doc doc = new Doc();
         String docID = DiyUUID.generateDocID();

@@ -42,6 +42,19 @@ public class DocController {
         }
     }
 
+    @RequestMapping("copyDoc")
+    public String copyDoc(@RequestParam("userID") String userID, @RequestParam("copyDocID") String copyDocID){
+        try {
+            String docID = docService.copyDoc(copyDocID);
+            historyService.addDoc(userID,docID);
+            return docID;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return "1";
+        }
+    }
+
     @RequestMapping("/getAllTemplate")
     public List<Template> getAllTemplate(){
         try {
